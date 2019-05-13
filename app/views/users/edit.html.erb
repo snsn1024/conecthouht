@@ -1,0 +1,24 @@
+<div class="body">
+	<div class="container">
+		<div class="raw">
+			<div class="col-md-3 col-md-offset-1 well">
+				follow
+			</div>
+			<div class="col-md-4 well">
+				tree
+			</div>
+			<div class="col-md-3 well">
+				current_user
+				<%= form_for(@user) do |f| %>
+				<p>名前</p>
+				<%= f.text_field :name %>
+				<p>profile</p>
+				<%= f.text_area :profile %>
+				<p>image</p>
+				<%= f.attachment_field :user_image %>
+				<%= f.submit '保存' %>    
+				<% end %>
+			</div>
+		</div>
+	</div>
+</div>
