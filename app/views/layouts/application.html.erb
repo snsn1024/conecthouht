@@ -1,15 +1,33 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Conecthouht</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>Conecthouht</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-    <%= yield %>
-  </body>
+<body>
+  <nav class="navbar navbar-dark" style="background-color:#000000;">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-md-offset-2">
+          <span style="color:#ffffff;font-size:x-large;">Conecthouht</span>
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+              <li><%= current_user.email %>
+              <li><%= link_to' logout',destroy_user_session_path, method: :delete%></li>
+            <% else %>
+              <li><%= link_to' Register','/users/sign_up' %></li>
+              <li><%= link_to' Login','/users/sign_in' %></li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
+<%= yield %>
+</body>
 </html>
