@@ -17,8 +17,8 @@
           <span style="color:#ffffff;font-size:x-large;">Conecthouht</span>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
-              <li><%= current_user.email %>
-              <li><%= link_to' logout',destroy_user_session_path, method: :delete%></li>
+              <li><%= link_to' Setting',user_path(current_user.id) %>
+              <li><%= link_to' Logout',destroy_user_session_path, method: :delete%></li>
             <% else %>
               <li><%= link_to' Register','/users/sign_up' %></li>
               <li><%= link_to' Login','/users/sign_in' %></li>
@@ -28,6 +28,6 @@
       </div>
     </div>
   </nav>
-<%= yield %>
+  <%= yield %>
 </body>
 </html>
