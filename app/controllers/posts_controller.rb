@@ -1,14 +1,14 @@
 class PostsController < ApplicationController
 
-	def create
-		@post = Post.new(post_params)
-		@post.save
-		redirect_to post_path(post.id)
-	end
-
 	def index
 		@post = Post.new
 		@posts = Post.all
+	end
+	
+	def create
+		post = Post.new(post_params)
+		post.save
+		redirect_to post_path(post.id)
 	end
 
 	def show
