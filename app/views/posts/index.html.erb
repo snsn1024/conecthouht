@@ -1,9 +1,30 @@
 <div class="body">
   <div class="container">
     <div class="raw">
+      <div class="container text-center">
+        <button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#post">投稿する</button>
+        <div class="modal fade" id="post" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <%= form_for(@post) do |f| %>
+              <div class="modal-body">
+                <p>title</p>
+                <%= f.text_field :post_title %><br>
+                <p>text</p>
+                <%= f.text_area :post_text %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                <%= f.submit "投稿する", class: "btn btn-primary" %>
+              </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="col-md-8 col-md-offset-2">
         <% @posts.each do |post| %>
-        <%= post.post_title %>
+        <%= link_to post.post_title,post_path(post.id) %>
         <%= post.post_text %>
         <% end %>
       </div>
