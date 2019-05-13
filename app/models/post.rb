@@ -3,4 +3,5 @@ class Post < ApplicationRecord
 	has_many :favorites
 	belongs_to :gunre
 	belongs_to :user
+	has_many :replies
 end
