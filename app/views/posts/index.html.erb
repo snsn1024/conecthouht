@@ -23,8 +23,9 @@
     </div>
     <div class="col-md-8 col-md-offset-2">
       <% @posts.each do |post| %>
-      <%= post.post_title %>
-      <%= post.post_text %>
+      <tr>
+        <li><%= link_to post.post_title,post_path(post.id) %></li>
+      </tr>
       <% end %>
     </div>
   </div>

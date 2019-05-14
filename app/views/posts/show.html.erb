@@ -9,8 +9,10 @@
 			</div>
 			<div class="col-md-3 well">
 				current_user
-				<%= post.post_title %>
-				<%= post.post_text %>
+				<% @posts.each do |post| %>
+				<tr>
+					<li><%= @posts.post_title %></li>
+				</tr>
 			</div>
 		</div>
 	</div>
