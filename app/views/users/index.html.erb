@@ -3,7 +3,7 @@
 		<div class="col-md-8 col-md-offset-2">
 			<% @users.each do |user| %>
 			<div>
-				<%= link_to attachment_image_tag user, :user_image, :fill, 150, 150 %><br>
+				<%= link_to attachment_image_tag(user, :user_image, :fill, 150, 150),user_path(user.id) %><br>
 				<%= link_to user.name,user_path(user.id) %>
 			</div>
 			<% end %> 
