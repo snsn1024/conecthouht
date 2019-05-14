@@ -7,6 +7,7 @@
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -17,17 +18,17 @@
           <span style="color:#ffffff;font-size:x-large;">Conecthouht</span>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
-              <li><%= link_to' Setting',user_path(current_user.id) %>
+            <li><%= link_to' Setting',user_path(current_user.id) %>
               <li><%= link_to' Logout',destroy_user_session_path, method: :delete%></li>
-            <% else %>
+              <% else %>
               <li><%= link_to' Register','/users/sign_up' %></li>
               <li><%= link_to' Login','/users/sign_in' %></li>
-            <% end %>
-          </ul>
+              <% end %>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
-  <%= yield %>
-</body>
-</html>
+    </nav>
+    <%= yield %>
+  </body>
+  </html>
