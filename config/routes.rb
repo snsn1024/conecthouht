@@ -8,4 +8,5 @@ Rails.application.routes.draw do
 		resource :favorites, only: [:create, :destroy]
 		resource :replys
 	end
+	resources :relationships, only: [:create, :destroy]
 end
