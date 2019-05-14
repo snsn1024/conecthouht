@@ -8,7 +8,7 @@
 				tree
 			</div>
 			<div class="col-md-3 well">
-				<%= @user.name %>
+				<%= @user.name %> <%= link_to "edit",edit_user_path(current_user.id) %>
 				<%= attachment_image_tag @user, :user_image, :fill, 245, 245, format: 'jpeg' %>
 				<%= @user.profile %>
 			</div>
