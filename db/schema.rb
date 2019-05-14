@@ -11,6 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema.define(version: 2019_05_13_175841) do
+ActiveRecord::Schema.define(version: 2019_05_14_091301) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "comment_id"
@@ -24,6 +25,13 @@ ActiveRecord::Schema.define(version: 2019_05_13_175841) do
     t.integer "favorite_id"
     t.integer "user_id"
     t.integer "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.integer "genre_id"
+    t.string "genre_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class GunreTest < ActiveSupport::TestCase
+class GenreControllerTest < ActionDispatch::IntegrationTest
   # test "the truth" do
   #   assert true
   # end

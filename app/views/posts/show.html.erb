@@ -1,11 +1,18 @@
 <div class="body">
 	<div class="container">
 		<div class="raw">
-			<div class="col-md-2 col-md-offset-2">
+			<div class="col-md-3 col-md-offset-1 well">
+				other_user
 			</div>
-			<div class="col-md-2 col-md-offset-4">
+			<div class="col-md-4 well">
+				tree
 			</div>
-			<div class="col-md-2 col-md-offset-6">
+			<div class="col-md-3 well">
+				current_user
+				<% @posts.each do |post| %>
+				<tr>
+					<li><%= @posts.post_title %></li>
+				</tr>
 			</div>
 		</div>
 	</div>
