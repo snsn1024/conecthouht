@@ -15,9 +15,19 @@
 			</div>
 			<div class="col-md-3 well">
 				current_user
-				<%= @user.name %> <%= link_to "edit",edit_user_path(current_user.id) %>
-				<%= attachment_image_tag @user, :user_image, :fill, 245, 245, format: 'jpeg' %>
-				<%= @user.profile %>
+				<div>
+					<%= @user.name %> <%= link_to "edit",edit_user_path(current_user.id) %>
+					<%= attachment_image_tag @user, :user_image, :fill, 245, 245, format: 'jpeg' %>
+					<%= @user.profile %>
+				</div>
+				favorites
+				<% @favorites.each do |favorite| %>
+				<div>
+					<tr>
+						<li><%= link_to favorite.post.post_title,post_path(favorite.post.id) %></li>
+					</tr>
+				</div>
+				<% end %>
 			</div>
 		</div>
 	</div>
