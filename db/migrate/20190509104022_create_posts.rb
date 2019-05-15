@@ -7,7 +7,7 @@ class CreatePosts < ActiveRecord::Migration[5.2]
     	t.text :post_image
     	t.text :post_sound
     	t.integer :user_id
-    	t.integer :gunre_id
+    	t.integer :genre_id
 
       t.timestamps
     end

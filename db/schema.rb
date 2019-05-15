@@ -43,7 +43,7 @@ ActiveRecord::Schema.define(version: 2019_05_14_091301) do
     t.text "post_image"
     t.text "post_sound"
     t.integer "user_id"
-    t.integer "gunre_id"
+    t.integer "genre_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -59,6 +59,13 @@ ActiveRecord::Schema.define(version: 2019_05_14_091301) do
   end
 
   create_table "replies", force: :cascade do |t|
+    t.integer "reply_id"
+    t.string "reply_title"
+    t.text "reply_text"
+    t.text "reply_image"
+    t.text "reply_sound"
+    t.integer "post_id"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
