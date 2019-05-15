@@ -7,9 +7,14 @@
 			</div>
 			<div class="col-md-4 well">
 				tree
+				<% @posts.each do |post| %>
+				<tr>
+					<li><%= link_to post.post_title, post_path %></li>
+				</tr>
+				<% end %>
 			</div>
 			<div class="col-md-3 well">
-        current_user
+				current_user
 				<%= @user.name %> <%= link_to "edit",edit_user_path(current_user.id) %>
 				<%= attachment_image_tag @user, :user_image, :fill, 245, 245, format: 'jpeg' %>
 				<%= @user.profile %>
