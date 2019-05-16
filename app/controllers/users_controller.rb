@@ -9,6 +9,8 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@posts = @user.posts
 		@favorites = @user.favorites
+		@following = @user.following
+		@followers = @user.followers
 	end
 
 	def create
@@ -23,20 +25,6 @@ class UsersController < ApplicationController
 		@user = User.find(params[:id])
 		@user.update(user_params)
 		redirect_to user_path(current_user.id)
-	end
-
-	def following
-		@title = "Following"
-		@user  = User.find(params[:id])
-		@users = @user.following.paginate(page: params[:page])
-		render 'show_follow'
-	end
-
-	def followers
-		@title = "Followers"
-		@user  = User.find(params[:id])
-		@users = @user.followers.paginate(page: params[:page])
-		render 'show_follow'
 	end
 
 	private

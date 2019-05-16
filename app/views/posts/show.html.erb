@@ -1,77 +1,79 @@
-<div class="body">
-	<div class="container">
-		<div class="raw">
-			<div class="container text-center">
-				<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#reply">投稿する</button>
-				<div class="modal fade" id="reply" tabindex="-1" role="dialog" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<%= form_for [@post, @reply] do |f| %>
-							<div class="modal-body">
-								<p>title</p>
-								<%= f.text_field :reply_title %><br>
-								<p>text</p>
-								<%= f.text_area :reply_text %>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-								<%= f.submit "投稿する", class: "btn btn-primary" %>
-							</div>
-							<% end %>
+<div class="container">
+	<div class="raw">
+		<div class="container text-center">
+			<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#reply">投稿する</button>
+			<div class="modal fade" id="reply" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<%= form_for [@post, @reply] do |f| %>
+						<div class="modal-body">
+							<p>title</p>
+							<%= f.text_field :reply_title %><br>
+							<p>text</p>
+							<%= f.text_area :reply_text %>
 						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+							<%= f.submit "投稿する", class: "btn btn-primary" %>
+						</div>
+						<% end %>
 					</div>
 				</div>
 			</div>
-			<div class="col-md-3 col-md-offset-1 well">
-				other_user
-				<div>
-					<% @replies.each do |reply| %>
-					<p><%= reply.reply_title %></p>
-					<p><%= reply.reply_text %></p>
-					<%= attachment_image_tag reply.user, :user_image, :fill, 50, 50, format: 'jpeg' %>
-					<%= reply.user.name %> <%= reply.created_at.strftime('%Y/%m/%d') %>
-					<% end %>
-				</div>
+		</div>
+		<div class="col-md-3 col-md-offset-1 well">
+			<div>
+				<% @replies.each do |reply| %>
+				<p><%= reply.reply_title %></p>
+				<p><%= reply.reply_text %></p>
+				<%= link_to user_path(reply.user.id) do %>
+				<%= attachment_image_tag reply.user, :user_image, :fill, 50, 50 %>
+				<% end %>
+				<%= link_to reply.user.name,user_path(reply.user.id) %> <%= reply.created_at.strftime('%Y/%m/%d') %>
+				<% end %>
 			</div>
-			<div class="col-md-4 well">
-				tree
+		</div>
+		<div class="col-md-4 well">
+		</div>
+		<div class="col-md-3 well">
+			<div>
+				<p><%= @post.post_title %></p>
+				<p><%= @post.post_text %></p>
+				<%= link_to user_path(@post.user.id) do %>
+				<%= attachment_image_tag @post.user, :user_image, :fill, 50, 50 %>
+				<% end %>
+				<%= link_to @post.user.name, user_path(@post.user.id)%> <%= @post.created_at.strftime('%Y/%m/%d') %>
 			</div>
-			<div class="col-md-3 well">
-				current_user
-				<div>
-					<p><%= @post.post_title %></p>
-					<p><%= @post.post_text %></p>
-					<%= attachment_image_tag @post.user, :user_image, :fill, 50, 50, format: 'jpeg' %>
-					<%= @post.user.name %> <%= @post.created_at.strftime('%Y/%m/%d') %>
-				</div>
+		</div>
+		<div class="col-md-10 col-md-offset-1 well">
+			<div>
+				<% if @post.favorited_by?(current_user) %>
+				<%= link_to post_favorites_path(@post), method: :delete do %>
+				<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+				<%= @post.favorites.count %> いいね
+				<% end %>
+				<% else %>
+				<%= link_to post_favorites_path(@post), method: :post do %>
+				<i class="fa fa-heart-o" aria-hidden="true"></i>
+				<%= @post.favorites.count %> いいね
+				<% end %>
+				<% end %>
 			</div>
-			<div class="col-md-10 col-md-offset-1 well">
-				<div>
-					<% if @post.favorited_by?(current_user) %>
-					<%= link_to post_favorites_path(@post), method: :delete do %>
-					<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-					<%= @post.favorites.count %> いいね
-					<% end %>
-					<% else %>
-					<%= link_to post_favorites_path(@post), method: :post do %>
-					<i class="fa fa-heart-o" aria-hidden="true"></i>
-					<%= @post.favorites.count %> いいね
-					<% end %>
-					<% end %>
-				</div>
-				comment
-				<div>
-					<% @post.comments.each do |comment| %>
-					<p><%= comment.user.name %> <%= comment.created_at.strftime('%Y/%m/%d') %></p>
-					<p><%= comment.comment_text %></p>
-					<% end %>
-				</div>
-				<div>
-					<%= form_for [@post, @comment] do |f| %>
-					<%= f.text_area :comment_text, rows:'1', class: "form-control",placeholder: "コメントをここに" %>
-					<%= f.submit "submit" %>
-					<% end %>
-				</div>
+			comment
+			<div>
+				<% @post.comments.each do |comment| %>
+				<%= link_to user_path(comment.user.id) do %>
+				<%= attachment_image_tag comment.user, :user_image, :fill, 50, 50 %>
+				<% end %>
+				<%= link_to comment.user.name,user_path(comment.user.id) %> <%= comment.created_at.strftime('%Y/%m/%d') %></p>
+				<p><%= comment.comment_text %></p>
+				<% end %>
+			</div>
+			<div>
+				<%= form_for [@post, @comment] do |f| %>
+				<%= f.text_area :comment_text, rows:'1', class: "form-control",placeholder: "コメントをここに" %>
+				<%= f.submit "submit" %>
+				<% end %>
 			</div>
 		</div>
 	</div>
