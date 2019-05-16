@@ -1,0 +1,18 @@
+<% if @users.any? %>
+<div class="user_avatars">
+  <% @users.each do |user| %>
+  <%= attachment_image_tag user, :user_image, size: 30  %>
+  <% end %>
+</div>
+<% end %>
+</section>
+</aside>
+<div class="col-md-8">
+  <h3><%= @title %></h3>
+  <% if @users.any? %>
+  <ul class="users follow">
+    <%= render @users %>
+  </ul>
+  <%= will_paginate %>
+  <% end %>
+</div>
