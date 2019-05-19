@@ -8,7 +8,6 @@ class PostsController < ApplicationController
 	def create
 		post = Post.new(post_params)
 		post.user_id = current_user.id
-		# post.gunre_id = 
 		post.save
 		redirect_to post_path(post.id)
 	end
@@ -18,7 +17,6 @@ class PostsController < ApplicationController
 		@comment = Comment.new
 		@reply = Reply.new
 		@replies = @post.replies
-
 	end
 
 	def edit
@@ -40,6 +38,6 @@ class PostsController < ApplicationController
 	private
 
 	def post_params
-		params.require(:post).permit(:post_title,:post_text,:post_image,:post_sound)
+		params.require(:post).permit(:post_title,:post_text,:post_image,:post_sound,:tag_list)
 	end
 end

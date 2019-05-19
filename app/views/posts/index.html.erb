@@ -9,12 +9,14 @@
             <%= form_for(@post) do |f| %>
             <div class="modal-body">
               <p>title</p>
-                <%= f.text_field :post_title %><br>
+              <%= f.text_field :post_title %><br>
+              <%= f.label :tag_list, 'tag' %>
+              <%= text_field_tag 'post[tag_list]', @post.tag_list, :class => "form-control" %>
               <p>text</p>
-                <%= f.text_area :post_text %>
+              <%= f.text_area :post_text %>
               <p>image<p>
                 <%= f.attachment_field :post_image %>
-              <p>sound</p>
+                <p>sound</p>
                 <%= f.attachment_field :post_sound %>
               </div>
               <div class="modal-footer">
