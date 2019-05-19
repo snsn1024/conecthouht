@@ -18,6 +18,7 @@ class PostsController < ApplicationController
 		@comment = Comment.new
 		@reply = Reply.new
 		@replies = @post.replies
+		@reply_user = @replies.find(params[:id])
 	end
 
 	private

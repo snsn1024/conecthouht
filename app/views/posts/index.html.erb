@@ -1,5 +1,6 @@
 <div class="container">
   <div class="raw">
+    <!-- modal -->
     <div class="container text-center">
       <button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#post">投稿する</button>
       <div class="modal fade" id="post" tabindex="-1" role="dialog" aria-hidden="true">
@@ -8,25 +9,30 @@
             <%= form_for(@post) do |f| %>
             <div class="modal-body">
               <p>title</p>
-              <%= f.text_field :post_title %><br>
+                <%= f.text_field :post_title %><br>
               <p>text</p>
-              <%= f.text_area :post_text %>
+                <%= f.text_area :post_text %>
+              <p>image<p>
+                <%= f.attachment_field :post_image %>
+              <p>sound</p>
+                <%= f.attachment_field :post_sound %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+                <%= f.submit "投稿する", class: "btn btn-primary" %>
+              </div>
+              <% end %>
             </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-              <%= f.submit "投稿する", class: "btn btn-primary" %>
-            </div>
-            <% end %>
           </div>
         </div>
       </div>
-    </div>
-    <div class="col-md-8 col-md-offset-2">
-      <% @posts.each do |post| %>
-      <tr>
-        <li><%= link_to post.post_title,post_path(post.id) %></li>
-      </tr>
-      <% end %>
+      <!-- /modal -->
+      <div class="col-md-8 col-md-offset-2">
+        <% @posts.each do |post| %>
+        <tr>
+          <li><%= link_to post.post_title,post_path(post.id) %></li>
+        </tr>
+        <% end %>
+      </div>
     </div>
   </div>
-</div>

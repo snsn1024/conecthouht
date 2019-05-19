@@ -1,5 +1,6 @@
 <div class="container">
 	<div class="raw">
+		<!--bodal-->
 		<div class="container text-center">
 			<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#reply">投稿する</button>
 			<div class="modal fade" id="reply" tabindex="-1" role="dialog" aria-hidden="true">
@@ -11,6 +12,10 @@
 							<%= f.text_field :reply_title %><br>
 							<p>text</p>
 							<%= f.text_area :reply_text %>
+							<p>image</p>
+							<%= f.attachment_field :reply_image %>
+							<p>sound</p>
+							<%= f.attachment_field :reply_sound %>
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
@@ -21,29 +26,51 @@
 				</div>
 			</div>
 		</div>
+		<!--/modal-->
 		<div class="col-md-3 col-md-offset-1 well">
+			<!--other_user_reply-->
 			<div>
+				<% if @post.user != @reply_user.user %>
 				<% @replies.each do |reply| %>
 				<p><%= reply.reply_title %></p>
+				<%= attachment_image_tag reply, :reply_image, :fill, 245, 245 %>
 				<p><%= reply.reply_text %></p>
 				<%= link_to user_path(reply.user.id) do %>
 				<%= attachment_image_tag reply.user, :user_image, :fill, 50, 50 %>
 				<% end %>
 				<%= link_to reply.user.name,user_path(reply.user.id) %> <%= reply.created_at.strftime('%Y/%m/%d') %>
 				<% end %>
+				<% end %>
 			</div>
+			<!--/other_user_reply-->
 		</div>
 		<div class="col-md-4 well">
 		</div>
 		<div class="col-md-3 well">
+			<!--@user_reply-->
 			<div>
+				<% if @post.user == @reply_user.user %>
+				<% @replies.each do |reply| %>
+				<p><%= reply.reply_title %></p>
+				<%= attachment_image_tag reply, :reply_image, :fill, 245, 245 %>
+				<p><%= reply.reply_text %></p>
+				<%= link_to user_path(reply.user.id) do %>
+				<%= attachment_image_tag reply.user, :user_image, :fill, 50, 50 %>
+				<% end %>
+				<%= link_to reply.user.name,user_path(reply.user.id) %> <%= reply.created_at.strftime('%Y/%m/%d') %>
+				<% end %>
+				<% end %>
+				<!--/@user_reply-->
+				<!--post-->
 				<p><%= @post.post_title %></p>
+				<%= attachment_image_tag @post, :post_image, :fill, 245, 245 %>
 				<p><%= @post.post_text %></p>
 				<%= link_to user_path(@post.user.id) do %>
 				<%= attachment_image_tag @post.user, :user_image, :fill, 50, 50 %>
 				<% end %>
 				<%= link_to @post.user.name, user_path(@post.user.id)%> <%= @post.created_at.strftime('%Y/%m/%d') %>
 			</div>
+			<!--/post-->
 		</div>
 		<div class="col-md-10 col-md-offset-1 well">
 			<div>

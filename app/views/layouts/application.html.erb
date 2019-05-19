@@ -18,17 +18,20 @@
           <span style="color:#ffffff;font-size:x-large;">Conecthouht</span>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
-            <li><%= link_to' Setting',user_path(current_user.id) %>
-              <li><%= link_to' Logout',destroy_user_session_path, method: :delete%></li>
-              <% else %>
-              <li><%= link_to' Register','/users/sign_up' %></li>
-              <li><%= link_to' Login','/users/sign_in' %></li>
-              <% end %>
-            </ul>
-          </div>
+            <%= link_to user_path(current_user.id) do %>
+            <li><%= attachment_image_tag current_user, :user_image, :fill, 40, 40 %></li>
+            <% end %>
+            <li><%= link_to current_user.name,user_path(current_user.id) %></li>
+            <li><%= link_to' Logout',destroy_user_session_path, method: :delete%></li>
+            <% else %>
+            <li><%= link_to' Register','/users/sign_up' %></li>
+            <li><%= link_to' Login','/users/sign_in' %></li>
+            <% end %>
+          </ul>
         </div>
       </div>
-    </nav>
-    <%= yield %>
-  </body>
-  </html>
+    </div>
+  </nav>
+  <%= yield %>
+</body>
+</html>
