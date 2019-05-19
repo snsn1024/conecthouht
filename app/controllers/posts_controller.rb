@@ -18,7 +18,23 @@ class PostsController < ApplicationController
 		@comment = Comment.new
 		@reply = Reply.new
 		@replies = @post.replies
-		@reply_user = @replies.find(params[:id])
+
+	end
+
+	def edit
+		@post = Post.find(params[:id]) 
+	end
+
+	def update
+		@post = Post.find(params[:id]) 
+		@post.update(post_params)
+		redirect_to post_path(@post)
+	end
+
+	def destroy
+		@post = Post.find(params[:id])
+		@post.destroy
+		redirect_to posts_path
 	end
 
 	private
@@ -26,5 +42,4 @@ class PostsController < ApplicationController
 	def post_params
 		params.require(:post).permit(:post_title,:post_text,:post_image,:post_sound)
 	end
-
 end

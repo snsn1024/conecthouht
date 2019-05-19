@@ -30,13 +30,13 @@
 		<div class="col-md-3 col-md-offset-1 well">
 			<!--other_user_reply-->
 			<div>
-				<% if @post.user != @reply_user.user %>
+				<% if @post.user != @reply.user %>
 				<% @replies.each do |reply| %>
 				<p><%= reply.reply_title %></p>
-				<%= attachment_image_tag reply, :reply_image, :fill, 245, 245 %>
+				<%= attachment_image_tag reply, :reply_image, :fill, 245, 245, fallback:"no_image.jpg" %>
 				<p><%= reply.reply_text %></p>
 				<%= link_to user_path(reply.user.id) do %>
-				<%= attachment_image_tag reply.user, :user_image, :fill, 50, 50 %>
+				<%= attachment_image_tag reply.user, :user_image, :fill, 50, 50, fallback:"no_image.jpg" %>
 				<% end %>
 				<%= link_to reply.user.name,user_path(reply.user.id) %> <%= reply.created_at.strftime('%Y/%m/%d') %>
 				<% end %>
@@ -49,24 +49,25 @@
 		<div class="col-md-3 well">
 			<!--@user_reply-->
 			<div>
-				<% if @post.user == @reply_user.user %>
+				<% if @post.user == @reply.user %>
 				<% @replies.each do |reply| %>
 				<p><%= reply.reply_title %></p>
-				<%= attachment_image_tag reply, :reply_image, :fill, 245, 245 %>
+				<%= attachment_image_tag reply, :reply_image, :fill, 245, 245, fallback:"no_image.jpg" %>
 				<p><%= reply.reply_text %></p>
 				<%= link_to user_path(reply.user.id) do %>
-				<%= attachment_image_tag reply.user, :user_image, :fill, 50, 50 %>
+				<%= attachment_image_tag reply.user, :user_image, :fill, 50, 50, fallback:"no_image.jpg" %>
 				<% end %>
 				<%= link_to reply.user.name,user_path(reply.user.id) %> <%= reply.created_at.strftime('%Y/%m/%d') %>
 				<% end %>
 				<% end %>
 				<!--/@user_reply-->
 				<!--post-->
-				<p><%= @post.post_title %></p>
-				<%= attachment_image_tag @post, :post_image, :fill, 245, 245 %>
+				<p><%= @post.post_title %></p> <p><%= @post.post_title %> <%= link_to "edit",edit_post_path(@post.id) %></p> <p><%= link_to "delete", post_path(@post.id), method: :delete %></p>
+
+				<%= attachment_image_tag @post, :post_image, :fill, 245, 245, fallback:"no_image.jpg" %>
 				<p><%= @post.post_text %></p>
 				<%= link_to user_path(@post.user.id) do %>
-				<%= attachment_image_tag @post.user, :user_image, :fill, 50, 50 %>
+				<%= attachment_image_tag @post.user, :user_image, :fill, 50, 50, fallback:"no_image.jpg" %>
 				<% end %>
 				<%= link_to @post.user.name, user_path(@post.user.id)%> <%= @post.created_at.strftime('%Y/%m/%d') %>
 			</div>
@@ -90,7 +91,7 @@
 			<div>
 				<% @post.comments.each do |comment| %>
 				<%= link_to user_path(comment.user.id) do %>
-				<%= attachment_image_tag comment.user, :user_image, :fill, 50, 50 %>
+				<%= attachment_image_tag comment.user, :user_image, :fill, 50, 50, fallback:"no_image.jpg" %>
 				<% end %>
 				<%= link_to comment.user.name,user_path(comment.user.id) %> <%= comment.created_at.strftime('%Y/%m/%d') %></p>
 				<p><%= comment.comment_text %></p>
@@ -105,5 +106,3 @@
 		</div>
 	</div>
 </div>
-
-

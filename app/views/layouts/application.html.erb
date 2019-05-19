@@ -15,19 +15,19 @@
     <div class="container">
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
-          <span style="color:#ffffff;font-size:x-large;">Conecthouht</span>
+          <span style="color:#ffffff;font-size:xx-large;">Conecthouht</span>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
             <!-- search bar -->
             <%= search_form_for @search do |f| %>
-            <li><%= f.search_field :post_title_cont, class: "form-control",placeholder: "タイトル" %>
-              <%= f.submit "Search" %></li>
+            <li><div class="inline-block"><%= f.search_field :post_title_cont, class: "form-control",placeholder: "タイトルを入力" %></div>
+            <div class="inline-block"><%= f.submit "Search" %></div></li>
               <% end %>
             <!-- /search bar -->
-              <%= link_to user_path(current_user.id) do %>
-            <li><%= attachment_image_tag current_user, :user_image, :fill, 40, 40 %></li>
+            <li><%= link_to user_path(current_user.id) do %>
+            <%= attachment_image_tag current_user, :user_image, :fill, 50, 50 %>
               <% end %>
-            <li><%= link_to current_user.name,user_path(current_user.id) %></li>
+            <%= link_to current_user.name,user_path(current_user.id) %></li>
             <li><%= link_to' Logout',destroy_user_session_path, method: :delete%></li>
               <% else %>
             <li><%= link_to' Register','/users/sign_up' %></li>
@@ -41,3 +41,8 @@
   <%= yield %>
 </body>
 </html>
+
+<style>
+  .inline-block {
+    display: inline-block;
+  }
