@@ -2,10 +2,13 @@
 	<div class="raw">
 		<div class="col-md-8 col-md-offset-2">
 			<% @users.each do |user| %>
-			<div>
-				<%= link_to attachment_image_tag(user, :user_image, :fill, 150, 150, fallback:"no_image.jpg"),user_path(user.id) %><br>
-				<%= link_to user.name,user_path(user.id) %>
-			</div>
+			<ul class="list-group">
+				<li class="list-group-item">
+					<%= link_to attachment_image_tag(user, :user_image, :fill, 50, 50, fallback:"no_image.jpg"),user_path(user.id) %>
+					<%= link_to user.name,user_path(user.id) %><br>
+					<%= user.profile %>
+				</li>
+			</ul>
 			<% end %> 
 		</div>
 	</div>

@@ -57,6 +57,8 @@
 					<%= attachment_image_tag @user, :user_image, :fill, 245, 245 %>
 					<%= @user.profile %>
 				</div>
+				<div>
+					<%= time_ago_in_words(@user.created_at) %> ago
 				favorites
 				<% @favorites.each do |favorite| %>
 				<div>

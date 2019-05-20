@@ -26,7 +26,7 @@
               <% end %></div></li>
             <!-- /search bar -->
             <li><%= link_to user_path(current_user.id) do %>
-            <%= attachment_image_tag current_user, :user_image, :fill, 40, 40 %>
+            <%= attachment_image_tag current_user, :user_image, :fill, 40, 40, fallback:"no_image.jpg" %>
               <% end %></li>
             <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
               <% else %>
