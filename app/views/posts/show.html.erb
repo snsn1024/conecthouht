@@ -1,32 +1,8 @@
 <div class="container-fluid allview"> 
 	<div class="raw">
 		<div class="col-md-10 col-md-offset-1 contents">
-			<!--bodal-->
-			<div class="container text-center">
-				<button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#reply">投稿する</button>
-				<div class="modal fade" id="reply" tabindex="-1" role="dialog" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<%= form_for [@post, @reply] do |f| %>
-							<div class="modal-body">
-								<p>title</p>
-								<%= f.text_field :reply_title %><br>
-								<p>text</p>
-								<%= f.text_area :reply_text %>
-								<p>image</p>
-								<%= f.attachment_field :reply_image %>
-								<p>sound</p>
-								<%= f.attachment_field :reply_sound %>
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-								<%= f.submit "投稿する", class: "btn btn-primary" %>
-							</div>
-							<% end %>
-						</div>
-					</div>
-				</div>
-			</div>
+			<!--modal-->
+			<%= render 'posts/replymodal', post: @post, reply: @reply %>
 			<!--/modal-->
 			<% @replies.each do |reply| %>
 			<% if @post.user != reply.user %>

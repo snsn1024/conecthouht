@@ -2,44 +2,18 @@
   <div class="raw">
     <div class="col-md-8 col-md-offset-2">
       <!-- modal -->
-      <div class="container text-center">
-        <button type="button" class="btn btn-primary mt-5" data-toggle="modal" data-target="#post">投稿する</button>
-        <div class="modal fade" id="post" tabindex="-1" role="dialog" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <%= form_for(@post) do |f| %>
-              <div class="modal-body">
-                <p>title</p>
-                <%= f.text_field :post_title %><br>
-                <%= f.label :tag_list, 'tag' %>
-                <%= text_field_tag 'post[tag_list]', @post.tag_list, :class => "form-control" %>
-                <p>text</p>
-                <%= f.text_area :post_text %>
-                <p>image</p>
-                  <%= f.attachment_field :post_image %>
-                  <p>sound</p>
-                  <%= f.attachment_field :post_sound %>
-                </div>
-                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
-                  <%= f.submit "投稿する", class: "btn btn-primary" %>
-                </div>
-                <% end %>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- /modal -->
-        <% @posts.each do |post| %>
-        <ul class="list-group">
-          <li class="list-group-item">
-            <%= attachment_image_tag post.user, :user_image, :fill, 50, 50, fallback:"no_image.jpg" %><%= link_to post.post_title,post_path(post.id) %><br>
-            by <%= link_to post.user.name, user_path(post.user.id) %>
-            <%= time_ago_in_words(post.created_at) %> ago 
-            reply : <%= post.replies.count %>
-            favorite : <%= post.favorites.count %></li>
-          </ul>
-          <% end %>
-        </div>
+      <%= render 'posts/postmodal', post: @post %>
+      <!-- /modal -->
+      <% @posts.each do |post| %>
+      <ul class="list-group">
+        <li class="list-group-item">
+          <%= attachment_image_tag post.user, :user_image, :fill, 50, 50, fallback:"no_image.jpg" %><%= link_to post.post_title,post_path(post.id) %><br>
+          by <%= link_to post.user.name, user_path(post.user.id) %>
+          <%= time_ago_in_words(post.created_at) %> ago 
+          reply : <%= post.replies.count %>
+          favorite : <%= post.favorites.count %></li>
+        </ul>
+        <% end %>
       </div>
     </div>
+  </div>
