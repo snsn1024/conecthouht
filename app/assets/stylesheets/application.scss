@@ -14,4 +14,11 @@
  *= require_self
  */
     @import "bootstrap-sprockets";
-    @import "bootstrap";  
+    @import "bootstrap";
+
+    .allview{
+    	background-color: #1c8c42;
+    }
+    .contents{
+    	background-color: #ffffff;
+    }

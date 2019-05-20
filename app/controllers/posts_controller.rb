@@ -2,7 +2,7 @@ class PostsController < ApplicationController
 
 	def index
 		@post = Post.new
-		@posts = Post.all
+		@posts = Post.all.order(created_at: :desc)
 	end
 	
 	def create
@@ -16,7 +16,7 @@ class PostsController < ApplicationController
 		@post = Post.find(params[:id]) 
 		@comment = Comment.new
 		@reply = Reply.new
-		@replies = @post.replies
+		@replies = @post.replies.order(created_at: :desc)
 	end
 
 	def edit

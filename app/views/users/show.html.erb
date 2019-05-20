@@ -1,64 +1,63 @@
-<div class="body">
-	<div class="container">
-		<div class="raw">
-			<div class="col-md-3 col-md-offset-1 well">
-				<% @user ||= current_user %>
-				<!--follow status -->
+<div class="container-fluid allview">
+	<div class="raw">
+		<div class="col-md-3 col-md-offset-1 well">
+			<% @user ||= current_user %>
+			<!--follow status -->
+			<div>
+				<strong><%= @user.following.count %> </strong>following<br>
+				<% @following.each do |user| %>
 				<div>
-					<strong><%= @user.following.count %> </strong>following<br>
-					<% @following.each do |user| %>
-					<div>
-						<%= link_to user_path(user.id) do %>
-						<%= attachment_image_tag user, :user_image, :fill, 40, 40 %>
-						<% end %> 
-						<%= link_to user.name, user %>
-					</div>
-					<% end %>
-					<strong> <%= @user.followers.count %> </strong>followers<br>
-					<% @followers.each do |user| %>
-					<div>
-						<%= link_to user_path(user.id) do %>
-						<%= attachment_image_tag user, :user_image, :fill, 40, 40 %>
-						<% end %>
-						<%= link_to user.name, user %>
-					</div>
-					<% end %>
-				</div>
-				<!-- /follow status -->
-				<!--follow_unfollow botton-->
-				<% if current_user != @user %>
-				<div id="follow_form">
-					<% unless current_user.following?(@user) %>,fallback:"no_image.jpg"
-					<%= form_for(current_user.active_relationships.build) do |f| %>
-					<div><%= hidden_field_tag :followed_id, @user.id %></div>
-					<%= f.submit "Follow", class: "btn btn-primary" %>
-					<% end %>
-					<% else %>
-					<%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
-					html: { method: :delete }) do |f| %>
-					<%= f.submit "Unfollow", class: "btn" %>
-					<% end %>
-					<% end %>
+					<%= link_to user_path(user.id) do %>
+					<%= attachment_image_tag user, :user_image, :fill, 40, 40 %>
+					<% end %> 
+					<%= link_to user.name, user %>
 				</div>
 				<% end %>
-				<!--/follow_unfollow botton-->
-			</div>
-			<div class="col-md-4 well">
-				<%= @user.posts.count %> 件の投稿
-				<% @posts.each do |post| %>
-				<tr>
-					<li><%= link_to post.post_title, post_path %></li>
-				</tr>
+				<strong> <%= @user.followers.count %> </strong>followers<br>
+				<% @followers.each do |user| %>
+				<div>
+					<%= link_to user_path(user.id) do %>
+					<%= attachment_image_tag user, :user_image, :fill, 40, 40 %>
+					<% end %>
+					<%= link_to user.name, user %>
+				</div>
 				<% end %>
 			</div>
-			<div class="col-md-3 well">
-				<div>
-					<%= @user.name %> <%= link_to "edit",edit_user_path(current_user.id) %>
-					<%= attachment_image_tag @user, :user_image, :fill, 245, 245 %>
-					<%= @user.profile %>
-				</div>
-				<div>
-					<%= time_ago_in_words(@user.created_at) %> ago
+			<!-- /follow status -->
+			<!--follow_unfollow botton-->
+			<% if current_user != @user %>
+			<div id="follow_form">
+				<% unless current_user.following?(@user) %>,fallback:"no_image.jpg"
+				<%= form_for(current_user.active_relationships.build) do |f| %>
+				<div><%= hidden_field_tag :followed_id, @user.id %></div>
+				<%= f.submit "Follow", class: "btn btn-primary" %>
+				<% end %>
+				<% else %>
+				<%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
+				html: { method: :delete }) do |f| %>
+				<%= f.submit "Unfollow", class: "btn" %>
+				<% end %>
+				<% end %>
+			</div>
+			<% end %>
+			<!--/follow_unfollow botton-->
+		</div>
+		<div class="col-md-4 well">
+			<%= @user.posts.count %> 件の投稿
+			<% @posts.each do |post| %>
+			<tr>
+				<li><%= link_to post.post_title, post_path %></li>
+			</tr>
+			<% end %>
+		</div>
+		<div class="col-md-3 well">
+			<div>
+				<%= @user.name %> <%= link_to "edit",edit_user_path(current_user.id) %>
+				<%= attachment_image_tag @user, :user_image, :fill, 245, 245 %>
+				<%= @user.profile %>
+			</div>
+			<div>
+				<%= time_ago_in_words(@user.created_at) %> ago
 				favorites
 				<% @favorites.each do |favorite| %>
 				<div>
@@ -70,4 +69,3 @@
 			</div>
 		</div>
 	</div>
-</div>
