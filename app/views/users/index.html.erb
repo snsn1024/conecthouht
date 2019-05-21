@@ -1,12 +1,16 @@
-<div class="container-fluid allview">
+<div class="container-fluid bg-green">
 	<div class="raw">
 		<div class="col-md-8 col-md-offset-2">
 			<% @users.each do |user| %>
 			<ul class="list-group">
 				<li class="list-group-item">
-					<%= link_to attachment_image_tag(user, :user_image, :fill, 50, 50, fallback:"no_image.jpg"),user_path(user.id) %>
-					<%= link_to user.name,user_path(user.id) %><br>
+					<%= link_to attachment_image_tag(user, :user_image, :fill, 60, 60),user_path(user.id) %>
+					<strong><%= link_to user.name,user_path(user.id) %></strong>
 					<%= user.profile %>
+					<p class="text-right">
+						<i class="fas fa-tree"></i> <%= user.posts.count %>
+						<i class="fas fa-reply-all"></i> <%= user.replies.count %>
+					</p>
 				</li>
 			</ul>
 			<% end %> 

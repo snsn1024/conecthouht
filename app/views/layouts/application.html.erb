@@ -8,36 +8,48 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" >
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <nav class="navbar navbar-dark" style="background-color:#000000;">
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <span style="color:#1c8c42;font-size:xx-large;">Conecthouht</span>
-          <ul class="nav navbar-nav navbar-right">
-            <% if user_signed_in? %>
-            <!-- search bar -->
-            <li><div class="search_box">
-              <div class="inline-block"><%= search_form_for @search do |f| %>
-            <%= f.search_field :post_title_cont, class: "form-control",placeholder: "タイトルを入力" %></div>
-            <div class="inline-block"><%= f.submit "Search" %></div>
-              <% end %></div></li>
-            <!-- /search bar -->
-            <li><%= link_to user_path(current_user.id) do %>
-            <%= attachment_image_tag current_user, :user_image, :fill, 40, 40, fallback:"no_image.jpg" %>
-              <% end %></li>
-            <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+  <header>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <div class="navbar-headline">
+              <a class="navbar-brand">Conecthouht</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+              <% if user_signed_in? %>
+              <!-- search bar -->
+              <li>
+                <div class="search_box">
+                  <div class="inline-block"><%= search_form_for @search do |f| %>
+                    <%= f.search_field :post_title_cont, class: "form-control",placeholder: "タイトルを入力" %>
+                  </div>
+                  <div class="inline-block"><%= f.submit "Search" %>
+                  </div>
+                  <% end %>
+                </div>
+              </li>
+              <!-- /search bar -->
+              <li><%= link_to user_path(current_user.id) do %>
+                <%= attachment_image_tag current_user, :user_image, :fill, 40, 40 %>
+                <% end %>
+              </li>
+              <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
               <% else %>
-            <li><%= link_to' Register','/users/sign_up' %></li>
-            <li><%= link_to' Login','/users/sign_in' %></li>
+              <li><%= link_to' Register','/users/sign_up' %></li>
+              <li><%= link_to' Login','/users/sign_in' %></li>
               <% end %>
-          </ul>
+            </ul>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+  </header>
   <%= yield %>
 </body>
 </html>
@@ -49,3 +61,11 @@
   .search_box{
     padding-top: 17px;
   }
+  .bg-green {
+    padding-top: 20px;
+    margin-top: -20px;
+  }
+  .col-md-4 {
+    margin: auto 5px;
+  }
+</style>
