@@ -13,7 +13,7 @@
             <i class="fas fa-reply"></i> <%= post.replies.count %>
             <i class="fas fa-heart"></i> <%= post.favorites.count %>
             by <%= link_to post.user.name, user_path(post.user.id) %>
-            <%= post.created_at.strftime('%Y/%m/%d %H:%M') %> (<%= time_ago_in_words(post.created_at) %> ago)
+            <%= post.created_at.strftime('%Y/%m/%d %H:%M') %> ( <%= time_ago_in_words(post.created_at) %> ago )
           </p>
         </li>
       </ul>

@@ -11,6 +11,7 @@ class UsersController < ApplicationController
 		@favorites = @user.favorites
 		@following = @user.following
 		@followers = @user.followers
+		@replies = @user.replies
 	end
 
 	def create

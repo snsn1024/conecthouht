@@ -1,6 +1,6 @@
 <div class="container-fluid bg-green"> 
 	<div class="raw">
-		<div class="col-md-10 col-md-offset-1 bg-white">
+		<div class="col-md-10 col-md-offset-1">
 			<!--modal-->
 			<%= render 'posts/replymodal', post: @post, reply: @reply %>
 			<!--/modal-->
@@ -8,7 +8,7 @@
 			<% if @post.user != reply.user %>
 			<!--other_user_reply-->
 			<div class="col-md-10 col-md-offset-1">
-				<div class="pull-left">
+				<div class="pull-left well">
 					<p><%= reply.reply_title %></p>
 					<%= attachment_image_tag reply, :reply_image, :fill, 250, 250 %>
 					<p><%= reply.reply_text %></p>
@@ -21,8 +21,8 @@
 			<!--/other_user_reply-->
 			<% else %>
 			<!--@post.user_reply-->
-			<div class="col-md-10 col-md-offset-1 bg-white">
-				<div class="pull-right">
+			<div class="col-md-10 col-md-offset-1">
+				<div class="pull-right well">
 					<p><%= reply.reply_title %></p>
 					<%= attachment_image_tag reply, :reply_image, :fill, 250, 250 %>
 					<p><%= reply.reply_text %></p>
@@ -36,56 +36,60 @@
 			<% end %>
 			<% end %>
 			<!--first_post-->
-			<div class="col-md-10 col-md-offset-1 bg-white">
-				<div>
-					<div class="pull-right">
-						<p><%= @post.post_title %></p>
-						<% @post.tag_list.each do |tag| %>
-						<span style="background-color: #e9e9e9; border-radius: 5px;"><%= tag %></span>
-						<% end %>
-						<p><%= link_to "edit",edit_post_path(@post.id) %></p>
-						<p><%= link_to "delete", post_path(@post.id), method: :delete %></p>
-						<%= attachment_image_tag @post, :post_image, :fill, 250, 250 %>
-						<p><%= @post.post_text %></p>
-						<%= link_to user_path(@post.user.id) do %>
-						<%= attachment_image_tag @post.user, :user_image, :fill, 40, 40 %>
-						<% end %>
-						<%= link_to @post.user.name, user_path(@post.user.id)%> <%= time_ago_in_words(@post.created_at) %>
-					</div>
+			<div class="col-md-10 col-md-offset-1">
+				<div class="pull-right well">
+					<p><%= @post.post_title %></p>
+					<% @post.tag_list.each do |tag| %>
+					<span style="background-color: #e9e9e9; border-radius: 5px;"><%= tag %></span>
+					<% end %>
+					<p><%= link_to "edit",edit_post_path(@post.id) %></p>
+					<p><%= link_to "delete", post_path(@post.id), method: :delete %></p>
+					<%= attachment_image_tag @post, :post_image, :fill, 250, 250 %>
+					<p><%= @post.post_text %></p>
+					<%= link_to user_path(@post.user.id) do %>
+					<%= attachment_image_tag @post.user, :user_image, :fill, 40, 40 %>
+					<% end %>
+					<%= link_to @post.user.name, user_path(@post.user.id)%> <%= time_ago_in_words(@post.created_at) %>
 				</div>
 			</div>
 			<!--/first_post-->
-			<div class="col-md-12 soil">
-				<div>
-					<% if @post.favorited_by?(current_user) %>
-					<%= link_to post_favorites_path(@post), method: :delete do %>
-					<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-					<%= @post.favorites.count %> いいね
-					<% end %>
-					<% else %>
-					<%= link_to post_favorites_path(@post), method: :post do %>
-					<i class="fa fa-heart-o" aria-hidden="true"></i>
-					<%= @post.favorites.count %> いいね
-					<% end %>
-					<% end %>
-				</div>
-				comment
-				<div>
-					<% @post.comments.each do |comment| %>
-					<%= link_to user_path(comment.user.id) do %>
-					<%= attachment_image_tag comment.user, :user_image, :fill, 40, 40 %>
-					<% end %>
-					<%= link_to comment.user.name,user_path(comment.user.id) %> <%= comment.created_at.strftime('%Y/%m/%d') %></p>
-					<p><%= comment.comment_text %></p>
-					<% end %>
-				</div>
-				<div>
-					<%= form_for [@post, @comment] do |f| %>
-					<%= f.text_area :comment_text, rows:'1', class: "form-control",placeholder: "コメントをここに" %>
-					<%= f.submit "submit" %>
-					<% end %>
-				</div>
+		</div>
+	</div>
+</div>
+<div class="container-fluid soil">
+	<div class="raw">
+		<div class="col-md-8 col-md-offset-2">
+			<!--fav-->
+			<% if @post.favorited_by?(current_user) %>
+			<%= link_to post_favorites_path(@post), method: :delete do %>
+			<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
+			<%= @post.favorites.count %> いいね
+			<% end %>
+			<% else %>
+			<%= link_to post_favorites_path(@post), method: :post do %>
+			<i class="fa fa-heart-o" aria-hidden="true"></i>
+			<%= @post.favorites.count %> いいね
+			<% end %>
+			<% end %>
+			<!--/fav-->
+			<!--comment-->
+			<% @post.comments.each do |comment| %>
+			<div class="well">
+				<%= link_to user_path(comment.user.id) do %>
+				<%= attachment_image_tag comment.user, :user_image, :fill, 40, 40 %>
+				<% end %>
+				<%= comment.comment_text %>
+				<p class="text-right">
+					by <%= link_to comment.user.name,user_path(comment.user.id) %>
+					<%= comment.created_at.strftime('%Y/%m/%d %H:%M') %> ( <%= time_ago_in_words(comment.created_at) %> ago )
+				</p>
 			</div>
+			<% end %>
+			<%= form_for [@post, @comment] do |f| %>
+			<%= f.text_area :comment_text, rows:'1', class: "form-control",placeholder: "コメントをここに" %>
+			<%= f.submit "submit" %>
+			<% end %>
+			<!--/comment-->
 		</div>
 	</div>
 </div>
