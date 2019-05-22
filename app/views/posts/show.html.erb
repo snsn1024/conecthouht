@@ -1,72 +1,70 @@
 <div class="container-fluid bg-green"> 
 	<div class="raw">
+		<!--modal-->
+		<%= render 'posts/replymodal', post: @post, reply: @reply %>
+		<!--/modal-->
+		<% @replies.each do |reply| %>
+		<% if @post.user != reply.user %>
+		<!--other_user_reply-->
 		<div class="col-md-10 col-md-offset-1">
-			<!--modal-->
-			<%= render 'posts/replymodal', post: @post, reply: @reply %>
-			<!--/modal-->
-			<% @replies.each do |reply| %>
-			<% if @post.user != reply.user %>
-			<!--other_user_reply-->
-			<div class="col-md-10 col-md-offset-1">
-				<div class="pull-left well">
-					<div class="contents">
-						<p><%= reply.reply_title %></p>
-						<%= attachment_image_tag reply, :reply_image, :fill, 250, 250 %>
-						<p class="text"><%= reply.reply_text %></p>
-						<%= link_to user_path(reply.user.id) do %>
-						<%= attachment_image_tag reply.user, :user_image, :fill, 40, 40 %>
-						<% end %>
-						<%= link_to reply.user.name,user_path(reply.user.id) %>
-						<p class="text-right"><%= reply.created_at.strftime('%Y/%m/%d %H:%M') %> ( <%= time_ago_in_words(reply.created_at) %> ago )</p>
-					</div>
+			<div class="col-md-3 col-md-offset-1 well">
+				<div class="contents">
+					<p><%= reply.reply_title %></p>
+					<%= attachment_image_tag reply, :reply_image, :fill, 250, 250 %>
+					<p class="text"><%= reply.reply_text %></p>
+					<%= link_to user_path(reply.user.id) do %>
+					<%= attachment_image_tag reply.user, :user_image, :fill, 40, 40 %>
+					<% end %>
+					<%= link_to reply.user.name,user_path(reply.user.id) %>
+					<p class="text-right"><%= reply.created_at.strftime('%Y/%m/%d %H:%M') %> ( <%= time_ago_in_words(reply.created_at) %> ago )</p>
 				</div>
 			</div>
-			<!--/other_user_reply-->
-			<% else %>
-			<!--@post.user_reply-->
-			<div class="col-md-10 col-md-offset-1">
-				<div class="pull-right well">
-					<div class="contents">
-						<p><%= reply.reply_title %></p>
-						<%= attachment_image_tag reply, :reply_image, :fill, 250, 250 %>
-						<p><%= reply.reply_text %></p>
-						<%= link_to user_path(reply.user.id) do %>
-						<%= attachment_image_tag reply.user, :user_image, :fill, 40, 40 %>
-						<% end %>
-						<p class="text-right"><%= reply.created_at.strftime('%Y/%m/%d %H:%M') %> ( <%= time_ago_in_words(reply.created_at) %> ago )</p>
-					</div>
-				</div>				
-			</div>
-			<!--/@post.user_reply-->
-			<% end %>
-			<% end %>
-			<!--first_post-->
-			<div class="col-md-10 col-md-offset-1">
-				<div class="pull-right well">
-					<div class="contents">
-						<p><%= @post.post_title %></p>
-						<% @post.tag_list.each do |tag| %>
-						<span style="background-color: #e9e9e9; border-radius: 5px;"><%= tag %></span>
-						<% end %>
-						<p><%= link_to "edit",edit_post_path(@post.id) %></p>
-						<p><%= link_to "delete", post_path(@post.id), method: :delete %></p>
-						<%= attachment_image_tag @post, :post_image, :fill, 250, 250 %>
-						<p><%= @post.post_text %></p>
-						<%= link_to user_path(@post.user.id) do %>
-						<%= attachment_image_tag @post.user, :user_image, :fill, 40, 40 %>
-						<% end %>
-						<%= link_to @post.user.name, user_path(@post.user.id)%>
-						<p class="text-right"><%= @post.created_at.strftime('%Y/%m/%d %H:%M') %> ( <%= time_ago_in_words(@post.created_at) %> ago )</p>
-					</div>
-				</div>
-			</div>
-			<!--/first_post-->
 		</div>
+		<!--/other_user_reply-->
+		<% else %>
+		<!--@post.user_reply-->
+		<div class="col-md-10 col-md-offset-1">
+			<div class="col-md-3 col-md-offset-9 well">
+				<div class="contents">
+					<p><%= reply.reply_title %></p>
+					<%= attachment_image_tag reply, :reply_image, :fill, 250, 250 %>
+					<p><%= reply.reply_text %></p>
+					<%= link_to user_path(reply.user.id) do %>
+					<%= attachment_image_tag reply.user, :user_image, :fill, 40, 40 %>
+					<% end %>
+					<p class="text-right"><%= reply.created_at.strftime('%Y/%m/%d %H:%M') %> ( <%= time_ago_in_words(reply.created_at) %> ago )</p>
+				</div>
+			</div>				
+		</div>
+		<!--/@post.user_reply-->
+		<% end %>
+		<% end %>
+		<!--first_post-->
+		<div class="col-md-10 col-md-offset-1">
+			<div class="col-md-3 col-md-offset-9 well">
+				<div class="contents">
+					<p><%= @post.post_title %></p>
+					<% @post.tag_list.each do |tag| %>
+					<span style="background-color: #e9e9e9; border-radius: 5px;"><%= tag %></span>
+					<% end %>
+					<p><%= link_to "edit",edit_post_path(@post.id) %></p>
+					<p><%= link_to "delete", post_path(@post.id), method: :delete %></p>
+					<%= attachment_image_tag @post, :post_image, :fill, 250, 250 %>
+					<p><%= @post.post_text %></p>
+					<%= link_to user_path(@post.user.id) do %>
+					<%= attachment_image_tag @post.user, :user_image, :fill, 40, 40 %>
+					<% end %>
+					<%= link_to @post.user.name, user_path(@post.user.id)%>
+					<p class="text-right"><%= @post.created_at.strftime('%Y/%m/%d %H:%M') %> ( <%= time_ago_in_words(@post.created_at) %> ago )</p>
+				</div>
+			</div>
+		</div>
+		<!--/first_post-->
 	</div>
 </div>
 <div class="container-fluid soil">
 	<div class="raw">
-		<div class="col-md-8 col-md-offset-2">
+		<div class="col-md-10 col-md-offset-1">
 			<!--fav-->
 			<% if @post.favorited_by?(current_user) %>
 			<%= link_to post_favorites_path(@post), method: :delete do %>
@@ -104,5 +102,8 @@
 <style>
 	.contents {
 		word-break: break-word;
+	}
+	#modal{
+		margin-bottom: 20px;
 	}
 </style>
