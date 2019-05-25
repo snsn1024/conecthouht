@@ -1,52 +1,57 @@
 <div class="container-fluid bg-green">
 	<div class="raw">
 		<div class="col-md-8 col-md-offset-2 bg-purewhite main">
-			<section>
-				<h1>Plant & Nuture ...<br>Motivated ! </h1>
-				<p class="toptext">植える、育てる、やる気出る。</p>
-			</section>
+			<h1>Plant & Nuture ...<br>Motivated ! </h1>
+			<p class="toptext"><strong>植える、育てる、やる気出る。</strong></p>
 			<div class="menubox">
-				<section>
-					<h3>まず何をすればいいの?</h3>
-					<div class="inline-block">
-						<img id="topimage" src="/assets/topimage1.jpg">
-					</div>
-					<div class="inline-block" id="menucontents">
-						<p class="menutext">まずは種を植えてみましょう。<br>
-							あなたの種に様々な人が水を<br>
-							あげに来てくれるかもしれません。<br>
-							水をあげなくても言葉を残していってくれる<br>
-							人もいるかもしれません</p>
-					</div>
-				</section>
-				<section>
-					<h3>苗を見つけた!どうすればいいの?</h3>
-					<div class="inline-block">
-						<img id="topimage" src="/assets/topimage2.jpg">
-					</div>
-					<div class="inline-block" id="menucontents">
-						<p class="menutext">苗は常に水を欲しています。<br>
-							あなたの新鮮な作品は苗にとって<br>
-							必要不可欠な水分となって成長を促します。<br>
-							今は水がない!という人も苗にコメントを遺すことで<br>
-							健やかな成長の手助けができるかもしれません。</p>
-					</div>
-				</section>
+				<h3>まず何をすればいいの?</h3>
+				<div class="inline-block">
+					<img id="topimage" src="/assets/topimage1.jpg">
+				</div>
+				<div class="inline-block" id="menucontents">
+					<p class="menutext">まずは種を植えてみましょう。<br>
+						あなたの種に様々な人が水を<br>
+						あげに来てくれるかもしれません。<br>
+						水をあげなくても言葉を残していってくれる<br>
+					人もいるかもしれません</p>
+				</div>
+				<h3>苗を見つけた!どうすればいいの?</h3>
+				<div class="inline-block">
+					<img id="topimage" src="/assets/topimage2.jpg">
+				</div>
+				<div class="inline-block" id="menucontents">
+					<p class="menutext">苗は常に水を欲しています。<br>
+						あなたの新鮮な作品は苗にとって<br>
+						必要不可欠な水分となって成長を促します。<br>
+						今は水がない!という人も苗にコメントを遺すことで<br>
+					健やかな成長の手助けができるかもしれません。</p>
+				</div>
 			</div>
 		</div>		
 	</div>
 </div>
-</div>
+
 <style>
 	h1 {
 		color: #ffffff;
 		padding-top: 100px;
+		font-family: arial block;
 	}
 	.toptext {
 		color: #ffffff;
 	}
 	h3 {
 		padding-top: 120px;
+		border-bottom: solid 2px white;
+		position: relative;
+	}
+	h3:after {
+		position: absolute;
+		content: "";
+		display: block;
+		border-bottom: dashed 2px #1c8c42;
+		bottom: -3px;
+		width: 320px;
 	}
 	#topimage {
 		width: 320px;
@@ -62,6 +67,7 @@
 	}
 	#menucontents {
 		margin-left: 50px;
+		padding-top: 100px;
 	}
 
 </style>

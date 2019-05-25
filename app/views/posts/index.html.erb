@@ -1,14 +1,14 @@
 <div class="container-fluid bg-green">
   <div class="raw">
+    <!-- modal -->
+    <%= render 'posts/postmodal', post: @post %>
+    <!-- /modal -->
     <div class="col-md-8 col-md-offset-2">
-      <!-- modal -->
-      <%= render 'posts/postmodal', post: @post %>
-      <!-- /modal -->
       <% @posts.each do |post| %>
       <ul class="list-group">
         <li class="list-group-item">
-            <%= attachment_image_tag post.user, :user_image, :fill, 60, 60 %>
-            <strong><%= link_to post.post_title,post_path(post.id) %></strong>
+          <%= attachment_image_tag post.user, :user_image, :fill, 60, 60 %>
+          <strong><%= link_to post.post_title,post_path(post.id) %></strong>
           <p class="text-right">
             <i class="fas fa-reply"></i> <%= post.replies.count %>
             <i class="fas fa-heart"></i> <%= post.favorites.count %>

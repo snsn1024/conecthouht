@@ -18,8 +18,10 @@
       <div class="container-fluid">
         <div class="row">
           <div class="col-md-8 col-md-offset-2">
-            <div class="navbar-headline">
-              <a class="navbar-brand">Conecthouht</a>
+            <div class="navbar-headline inline-block">
+              <%= link_to root_path do %>
+              <p class="title">Conecthouht</p>
+              <% end %>
             </div>
             <ul class="nav navbar-nav navbar-right">
               <% if user_signed_in? %>
@@ -51,21 +53,54 @@
     </nav>
   </header>
   <%= yield %>
+  <footer>
+    <div class="container-fluid soil">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <ul class="list-inline">
+            <% if user_signed_in? %>
+            <li class="list-inline-item"><%= link_to "ALL USER", '/users' %></li>
+            <li class="list-inline-item">Copyright © 2019 Conecthouht All Rights Reserved.</li>
+            <li class="list-inline-item"><%= link_to "ALL POST", '/posts' %></li>
+            <% else %>
+            <li class="list-inline-item">Copyright © 2019 Conecthouht All Rights Reserved.</li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
 
 <style>
-  .inline-block {
-    display: inline-block;
-  }
-  .search_box{
-    padding-top: 17px;
-  }
-  .bg-green {
-    padding-top: 20px;
-    margin-top: -20px;
-  }
-  .col-md-4 {
-    margin: auto 5px;
-  }
+  body {
+   margin: 0px;
+   padding: 0px;
+   background-color: #802d29;
+ }
+ .title {
+  color: #1c8c42;
+  font-size: 40px;
+  font-family: arial block;
+}
+.inline-block {
+  display: inline-block;
+}
+.search_box{
+  padding-top: 17px;
+}
+.bg-green {
+  padding-top: 20px;
+  margin-top: -20px;
+}
+.col-md-4 {
+  margin: auto 5px;
+}
+li {
+  color: #ffffff;
+}
+footer {
+  padding: 20px 0;
+}
 </style>
