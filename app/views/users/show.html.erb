@@ -53,7 +53,7 @@
 			<%= attachment_image_tag @user, :user_image, :fill, 320, 320, class: "img-responsive center-block" %>
 			<h4><%= @user.name %></h4>
 			<p><%= @user.profile %></p>
-			<p><%= @user.created_at.strftime('%Y/%m/%d %H:%M') %> ( <%= time_ago_in_words(@user.created_at) %> ago )</p>
+			<p>登録日 : <%= @user.created_at.strftime('%Y/%m/%d %H:%M') %> ( <%= time_ago_in_words(@user.created_at) %> ago )</p>
 			<p class="text-right"><i class="fas fa-wrench"></i><%= link_to " edit",edit_user_path(current_user.id) %></p>
 			<!--follow_unfollow botton-->
 			<% if current_user != @user %> 

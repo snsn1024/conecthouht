@@ -13,12 +13,24 @@
  *= require_tree .
  *= require_self
  */
-    @import "bootstrap-sprockets";
-    @import "bootstrap";
+ @import "bootstrap-sprockets";
+ @import "bootstrap";
 
-    .bg-green{
-    	background-color: #1c8c42;
-    }
-    .bg-white{
-    	background-color: #e6e6e6;
-    }
+ .clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.contents {
+  word-break: break-word;
+}
+.bg-green{
+   background-color: #1c8c42;
+}
+.bg-white{
+   background-color: #f8f8f8;
+}
+.bg-purewhite{
+    background-color: #ffffff;
+}

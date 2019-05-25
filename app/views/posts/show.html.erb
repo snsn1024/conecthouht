@@ -19,6 +19,7 @@
 					<p class="text-right"><%= reply.created_at.strftime('%Y/%m/%d %H:%M') %> ( <%= time_ago_in_words(reply.created_at) %> ago )</p>
 				</div>
 			</div>
+			<img  class="img-rounded rewater" src="/assets/topimage1.jpg">
 		</div>
 		<!--/other_user_reply-->
 		<% else %>
@@ -34,7 +35,8 @@
 					<% end %>
 					<p class="text-right"><%= reply.created_at.strftime('%Y/%m/%d %H:%M') %> ( <%= time_ago_in_words(reply.created_at) %> ago )</p>
 				</div>
-			</div>				
+			</div>
+			<img class="img-rounded water" src="/assets/topimage1.jpg">
 		</div>
 		<!--/@post.user_reply-->
 		<% end %>
@@ -58,6 +60,7 @@
 					<p class="text-right"><%= @post.created_at.strftime('%Y/%m/%d %H:%M') %> ( <%= time_ago_in_words(@post.created_at) %> ago )</p>
 				</div>
 			</div>
+			<img class="img-rounded water" src="/assets/topimage1.jpg">
 		</div>
 		<!--/first_post-->
 	</div>
@@ -100,10 +103,18 @@
 	</div>
 </div>
 <style>
-	.contents {
-		word-break: break-word;
-	}
-	#modal{
+	#modal {
 		margin-bottom: 20px;
 	}
+	.rewater {
+		height: 80px;
+		width: 80px;
+		transform: scale(-1, 1);
+	}
+	.water {
+		height: 80px;
+		width: 80px;
+		margin-right :5px;
+	}
+
 </style>
