@@ -1,9 +1,9 @@
 <div class="container-fluid bg-green">
 	<div class="raw">
-		<div class="col-md-3 col-md-offset-1 well">
+		<div class="col-md-3 col-md-offset-1 well" id="scrollbox">
 			<% @user ||= current_user %>
 			<!--follow status -->
-			<h4><%= @user.following.count %> following</h4>
+			<h4><%= @user.following.count %> Following</h4>
 			<% @following.each do |user| %>
 			<div class="inline-block follow">
 				<%= link_to user_path(user.id) do %>
@@ -11,7 +11,7 @@
 				<% end %> 
 			</div>
 			<% end %>
-			<h4><%= @user.followers.count %> followers</h4>
+			<h4><%= @user.followers.count %> Followers</h4>
 			<% @followers.each do |user| %>
 			<div class="inline-block follow">
 				<%= link_to user_path(user.id) do %>
@@ -21,7 +21,7 @@
 			<% end %>
 			<!-- /follow status -->
 		</div>
-		<div class="col-md-4 well">
+		<div class="col-md-4 well" id="scrollbox">
 			<h4><%= @user.posts.count %> 件の投稿</h4>
 			<% @posts.each do |post| %>
 			<ul class="list-group">
@@ -49,15 +49,15 @@
 			</ul>
 			<% end %>
 		</div>
-		<div class="col-md-3 well">
+		<div class="col-md-3 well" id="scrollbox">
 			<%= attachment_image_tag @user, :user_image, :fill, 320, 320, class: "img-responsive center-block" %>
 			<h4><%= @user.name %></h4>
 			<p><%= @user.profile %></p>
 			<p>登録日 : <%= @user.created_at.strftime('%Y/%m/%d %H:%M') %> ( <%= time_ago_in_words(@user.created_at) %> ago )</p>
 			<% if current_user.admin? %>
-			<p class="text-right"><i class="fas fa-wrench"></i><%= link_to " edit",edit_user_path(current_user.id) %></p>
+			<p class="text-right"><%= link_to "edit",edit_user_path(current_user.id),class: "btn btn-warning" %></p>
 			<% elsif current_user == @user %>
-			<p class="text-right"><i class="fas fa-wrench"></i><%= link_to " edit",edit_user_path(current_user.id) %></p>
+			<p class="text-right"><%= link_to "edit",edit_user_path(current_user.id),class: "btn btn-warning" %></p>
 			<% end %>
 			<!--follow_unfollow botton-->
 			<% if current_user != @user %> 
@@ -100,4 +100,11 @@
 	.follow {
 		margin: 4px 2px;
 	}
-</style>
+	#scrollbox {
+		height: 516px;
+		overflow: scroll;
+	}
+	h4 {
+		border-bottom: dashed 3px #1c8c42;
+		line-height: 1.5
+	</style>

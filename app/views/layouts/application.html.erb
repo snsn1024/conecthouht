@@ -52,8 +52,8 @@
                 </ul>
               </li>
               <% else %>
-              <li><%= link_to' Register','/users/sign_up' %></li>
-              <li><%= link_to' Login','/users/sign_in' %></li>
+              <li class="unlogin"><%= link_to' Register','/users/sign_up' %></li>
+              <li class="unlogin"><%= link_to' Login','/users/sign_in' %></li>
               <% end %>
             </ul>
           </div>
@@ -90,6 +90,9 @@
   color: #1c8c42;
   font-size: 40px;
   font-family: arial block;
+}
+.unlogin {
+  margin-top: 7px;
 }
 .inline-block {
   display: inline-block;
