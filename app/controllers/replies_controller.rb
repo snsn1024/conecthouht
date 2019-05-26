@@ -1,4 +1,5 @@
 class RepliesController < ApplicationController
+	before_action :current_user,only:[:edit,:update,:destroy]
 
 	def create
 		post = Post.find(params[:post_id])

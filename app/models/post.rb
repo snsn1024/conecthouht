@@ -11,4 +11,7 @@ class Post < ApplicationRecord
 	end
 	belongs_to :user
 	has_many :replies, dependent: :destroy
+
+	validates :post_title, length: {maximum: 128} 
+	validates :post_text, length: {maximum: 256} 
 end

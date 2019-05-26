@@ -10,6 +10,9 @@
           <%= attachment_image_tag post.user, :user_image, :fill, 60, 60 %>
           <strong><%= link_to post.post_title,post_path(post.id) %></strong>
           <p class="text-right">
+            <% if current_user.admin? %>
+              <%= link_to "delete", post_path(post.id), method: :delete, class: "btn btn-danger" %>
+            <% end %>
             <i class="fas fa-reply"></i> <%= post.replies.count %>
             <i class="fas fa-heart"></i> <%= post.favorites.count %>
             by <%= link_to post.user.name, user_path(post.user.id) %>
@@ -23,8 +26,8 @@
 </div>
 
 <style> 
-  .list-group {
-    margin-top: 20px;
+  #modal {
+    margin-bottom: 20px;
   }
   .text-left {
     margin-left: 65px;

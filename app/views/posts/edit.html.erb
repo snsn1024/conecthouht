@@ -1,0 +1,32 @@
+<div class="container-fluid bg-green"> 
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2 text-center">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">編集</h3>
+        </div>
+        <div class="panel-body">
+          <%= form_for(@post) do |f| %>
+          <div class="field">
+            <p>title</p>
+            <%= f.text_field :post_title, :size => "80x1" %>
+            <div class="field">
+            <p>tag</p>
+              <%= text_field_tag 'post[tag_list]', @post.tag_list, :class => "form-control" %>
+            </div>
+            <div class="field">
+              <p>text</p>
+              <%= f.text_area :post_text, :size => "80x10" %>
+              <p>image</p>
+              <%= f.attachment_field :post_image %>
+            </div>
+            <div class="actions">
+              <%= f.submit "更新",class: "btn btn-primary" %>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

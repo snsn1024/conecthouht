@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
 	before_action :authenticate_user!, only: [:index, :show, :edit, :update, :following, :followers]
+	before_action :current_user,only:[:edit,:update,:destroy]
+
 	
 	def index
 		@users = User.all.order(created_at: :desc)

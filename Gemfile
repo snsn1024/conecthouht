@@ -62,7 +62,6 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'pry-rails'
 gem 'devise'
-gem 'activeadmin'
 gem 'kaminari','~> 1.1.1'
 gem 'ransack'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
