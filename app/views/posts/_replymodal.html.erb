@@ -5,14 +5,12 @@
 			<div class="modal-content">
 				<%= form_for [post, reply] do |f| %>
 				<div class="modal-body">
-					<p>title</p>
-					<%= f.text_field :reply_title %><br>
-					<p>text</p>
-					<%= f.text_area :reply_text %>
-					<p>image</p>
-					<%= f.attachment_field :reply_image %>
-					<p>sound</p>
-					<%= f.attachment_field :reply_sound %>
+					<p>タイトル</p>
+					<%= f.text_field :reply_title, size: "70x1" %>
+					<p>テキスト</p>
+					<%= f.text_area :reply_text, size: "70x8" %>
+					<p>画像</p>
+					<%= f.attachment_field :reply_image,class: "center-block" %>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>

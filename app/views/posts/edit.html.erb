@@ -7,26 +7,17 @@
         </div>
         <div class="panel-body">
           <%= form_for(@post) do |f| %>
-          <div class="field">
-            <p>title</p>
-            <%= f.text_field :post_title, :size => "80x1" %>
-            <div class="field">
-            <p>tag</p>
-              <%= text_field_tag 'post[tag_list]', @post.tag_list, :class => "form-control" %>
-            </div>
-            <div class="field">
-              <p>text</p>
-              <%= f.text_area :post_text, :size => "80x10" %>
-              <p>image</p>
-              <%= f.attachment_field :post_image %>
-            </div>
-            <div class="actions">
-              <%= f.submit "更新",class: "btn btn-primary" %>
-            </div>
-            <% end %>
-          </div>
+          <p>タイトル</p>
+          <%= f.text_field :post_title, size: "70x1" %>
+          <p>テキスト</p>
+          <%= f.text_area :post_text, :size => "70x8" %>
+          <p>画像</p>
+          <%= f.attachment_field :post_image,class:"center-block" %>
+          <%= f.submit "更新する",class: "btn btn-primary " %>
+          <% end %>
         </div>
       </div>
     </div>
   </div>
+</div>
 </div>
