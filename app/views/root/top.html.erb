@@ -1,37 +1,44 @@
 <div class="container-fluid bg-green">
 	<div class="raw">
 		<div class="col-md-8 col-md-offset-2 bg-purewhite main">
-			<h1>Plant & Nuture ...<br>Motivated ! </h1>
-			<p class="toptext"><strong>植える、育てる、やる気出る。</strong></p>
-			<div class="menubox">
+			<div>
+				<h1>Plant & Nuture ...<br>Motivated ! </h1>
+				<p class="toptext"><strong>植える、育てる、やる気出る。</strong></p>
+			</div>
+			<div class="text-center">
+				<h3>このサイトは?</h3>
+				<p class="menutext">
+					文章や画像を投稿したり、投稿された作品に対して文章や画像を返信できたりします。
+					<br>他にもコメントとかふぁぼとかフォローとか
+				</p>
+			</div>
+			<div class="col-md-6">
 				<h3>まず何をすればいいの?</h3>
-				<div class="inline-block">
-					<img id="topimage" src="/assets/topimage1.jpg">
-				</div>
-				<div class="inline-block" id="menucontents">
-					<p class="menutext">まずは種を植えてみましょう。<br>
-						あなたの種に様々な人が水を<br>
-						あげに来てくれるかもしれません。<br>
-						水をあげなくても言葉を残していってくれる<br>
-					人もいるかもしれません</p>
-				</div>
-				<h3>苗を見つけたら?</h3>
-				<div class="inline-block">
-					<img id="topimage" src="/assets/topimage2.jpg">
-				</div>
-				<div class="inline-block" id="menucontents">
-					<p class="menutext">苗は常に水を欲しています。<br>
-						あなたの新鮮な作品は苗にとって<br>
-						必要不可欠な水分となって成長を促します。<br>
-						今は水がない!という人も苗にコメントを遺すことで<br>
-					健やかな成長の手助けができるかもしれません。</p>
-				</div>
+				<img class="menuimage" src="/assets/topimage1.jpg">
+				<p class="menutext">
+					<br>まず勇気を持って作品を投稿してみましょう。
+					<br>創作活動においてNGは存在しません。
+					<br>アウトプットの連続がモチベーションの上昇に繋がります。
+				</p>
+			</div>
+			<div class="col-md-6">
+				<h3>返信したいんだけど?</h3>
+				<img class="menuimage" src="/assets/topimage2.jpg">
+				<p class="menutext">
+					<br>供給者は消費者からのレスポンスによって成長します。
+					<br>返信はインプット、アウトプットを同時にこなせるので
+					<br>成長への最適解と言えるでしょう。
+				</p>
 			</div>
 		</div>		
 	</div>
 </div>
 
 <style>
+	.main {
+		margin-bottom: 20px;
+		padding-bottom: 40px;
+	}
 	h1 {
 		color: #ffffff;
 		padding-top: 100px;
@@ -40,35 +47,19 @@
 	.toptext {
 		color: #ffffff;
 	}
+	.text-center {
+		margin-top: 220px;
+	}
 	h3 {
-		padding-top: 120px;
-		border-bottom: solid 3px white;
-		position: relative;
-		line-height: 1.5;
+		border-bottom: dashed 4px #1c8c42;
+		line-height: 1.5
 	}
-	h3:after {
-		position: absolute;
-		content: "";
-		display: block;
-		border-bottom: dashed 3px #1c8c42;
-		width: 320px;
-		line-height: 1.5;
+	.col-md-6 {
+		margin-top: 100px;
 	}
-	#topimage {
-		width: 320px;
-		height: 320px;
-	}
-	.menutext {
-		font-size: 120%;
-		line-height: 1.5;
-		letter-spacing: 0.2em;
-	}
-	.menubox {
-		padding-top: 50px;
-	}
-	#menucontents {
-		margin-left: 50px;
-		padding-top: 100px;
-	}
+	.menuimage {
+		height: 340px;
+		width: 340px: 
 
+	}
 </style>
