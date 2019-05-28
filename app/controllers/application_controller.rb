@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
 	before_action :set_search
 
 	def set_search
-		@search = Post.ransack(params[:post_title])
-		@results = @search.result
+		@search = Post.ransack(params[:q])
+		@search_posts = @search.result.includes(:user)
 	end
 end

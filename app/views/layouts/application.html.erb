@@ -28,7 +28,7 @@
               <!-- search bar -->
               <li>
                 <div class="search_box">
-                  <div class="inline-block"><%= search_form_for @search do |f| %>
+                  <div class="inline-block"><%= search_form_for @search, url: posts_path do |f| %>
                     <%= f.search_field :post_title_cont, class: "form-control",placeholder: "タイトルを入力" %>
                   </div>
                   <div class="inline-block"><%= f.submit "Search" %>
