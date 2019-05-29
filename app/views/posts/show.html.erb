@@ -1,8 +1,13 @@
 <div class="container-fluid bg-green"> 
 	<div class="raw">
 		<!--modal-->
-		<%= render 'posts/replymodal', post: @post, reply: @reply %>
-		<!--/modal-->
+		<div class="col-md-6">
+			<%= render 'posts/replymodal', post: @post, reply: @reply %>
+			<!--/modal-->
+		</div>
+		<div class="col-md-6">
+			<%= link_to 'ツイート', "https://twitter.com/share?url=#{request.url}&text=#{@post.post_title}", title: 'Twitter', target: '_blank',class: "btn btn-primary" %>
+		</div>
 		<% @replies.each do |reply| %>
 		<% if @post.user != reply.user %>
 		<!--other_user_reply-->
