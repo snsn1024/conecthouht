@@ -5,8 +5,13 @@ class RepliesController < ApplicationController
 		post = Post.find(params[:post_id])
 		reply = current_user.replies.new(reply_params)
 		reply.post_id = post.id
-		reply.save
-		redirect_to post_path(post.id)
+		if reply.save
+			flash[:notice] = "投稿しました!"
+			redirect_to post_path(post.id)
+		else
+			flash[:notice] = "Error!"
+			render :show
+		end
 	end
 
 	def edit
@@ -15,14 +20,24 @@ class RepliesController < ApplicationController
 
 	def update
 		@reply = Reply.find(params[:id])
-		@reply.update(reply_params)
-		redirect_to post_path(post.id)
+		if @reply.update(reply_params)
+			flash[:notice] = "更新しました!"
+			redirect_to post_path(post.id)
+		else
+			flash[:notice] = "Error!"
+			render :show
+		end
 	end
 
 	def destroy
 		@reply = Reply.find(params[:id])
-		@post.destroy
-		redirect_to posts_path
+		if @post.destroy
+			flash[:notice] = "消去しました!"
+			redirect_to posts_path
+		else
+			flash[:notice] = "Error!"
+			render :show
+		end
 	end
 
 

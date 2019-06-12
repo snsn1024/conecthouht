@@ -10,8 +10,13 @@ class PostsController < ApplicationController
 	def create
 		post = Post.new(post_params)
 		post.user_id = current_user.id
-		post.save
-		redirect_to post_path(post.id)
+		if post.save
+			flash[:notice] = "投稿しました!"
+			redirect_to post_path(post.id)
+		else
+			flash[:notice] = "Error!"
+			render :index
+		end
 	end
 
 	def show
@@ -27,14 +32,24 @@ class PostsController < ApplicationController
 
 	def update
 		@post = Post.find(params[:id]) 
-		@post.update(post_params)
-		redirect_to post_path(@post)
+		if @post.update(post_params)
+			flash[:notice] = "更新しました!"
+			redirect_to post_path(@post)
+		else
+			flash[:notice] = "Error!"
+			render :show
+		end
 	end
 
 	def destroy
 		@post = Post.find(params[:id])
-		@post.destroy
-		redirect_to posts_path
+		if @post.destroy
+			flash[:notice] = "消去しました!"
+			redirect_to posts_path
+		else
+			flash[:notice] = "Error!"
+			render :show
+		end
 	end
 
 	private

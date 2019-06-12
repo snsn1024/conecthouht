@@ -1,4 +1,7 @@
 <div class="container-fluid bg-green"> 
+	<% if flash[:notice] %>
+	<p id="flash"> <%= flash[:notice] %></p>
+	<% end %>
 	<div class="raw">
 		<!--modal-->
 		<div class="col-md-6">
@@ -56,15 +59,10 @@
 					<%= attachment_image_tag @post.user, :user_image, :fill, 50, 50 %>
 					<% end %>
 					<%= link_to @post.user.name, user_path(@post.user.id)%>
-					<% if current_user.admin? %>
+					<% if current_user.admin? || current_user == @post.user %>
 					<span class="button">
 						<%= link_to "edit",edit_post_path(@post.id), class: "btn btn-warning" %>
-						<%= link_to "delete", post_path(@post.id), method: :delete, class: "btn btn-danger" %>
-					</span>
-					<% elsif current_user == @post.user %>
-					<span class="button">
-						<%= link_to "edit",edit_post_path(@post.id), class: "btn btn-warning" %>
-						<%= link_to "delete", post_path(@post.id), method: :delete, class: "btn btn-danger" %>
+						<%= link_to "delete", post_path(@post.id), method: :delete, data: {confirm: "消去しますか?"}, class: "btn btn-danger" %>
 					</span>
 					<% end %>
 					<!--fav-->

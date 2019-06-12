@@ -1,4 +1,7 @@
 <div class="container-fluid bg-green">
+  <% if flash[:notice] %>
+  <p id="flash"> <%= flash[:notice] %></p>
+  <% end %>
   <div class="raw">
     <!-- modal -->
     <%= render 'posts/postmodal', post: @post %>
@@ -11,7 +14,7 @@
           <strong><%= link_to post.post_title,post_path(post.id) %></strong>
           <p class="text-right">
             <% if current_user.admin? %>
-              <%= link_to "delete", post_path(post.id), method: :delete, class: "btn btn-danger" %>
+            <%= link_to "delete", post_path(post.id), method: :delete, data: {confirm: "消去しますか?"}, class: "btn btn-danger" %>
             <% end %>
             <i class="fas fa-reply"></i> <%= post.replies.count %>
             <i class="fas fa-heart"></i> <%= post.favorites.count %>
