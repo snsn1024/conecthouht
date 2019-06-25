@@ -1,19 +1,19 @@
-<div class="container-fluid bg-green">
+<div class="container-fluid">
 	<div class="raw">
 		<div class="col-md-8 col-md-offset-2">
 			<% @users.each do |user| %>
-			<ul class="list-group">
-				<li class="list-group-item">
-					<%= link_to attachment_image_tag(user, :user_image, :fill, 60, 60),user_path(user.id) %>
-					<strong><%= link_to user.name,user_path(user.id) %></strong>
+			<div class="well" id="contentsbox">
+				<%= link_to attachment_image_tag(user, :user_image, :fill, 70, 70),user_path(user.id) %>
+				<div class="inline-block notspillout" style="margin-left: 15px;">
+					<p><strong><%= link_to user.name,user_path(user.id) %></strong></p>
 					<%= user.profile %>
-					<p class="text-right">
-						<i class="fas fa-tree"></i> <%= user.posts.count %>
-						<i class="fas fa-reply-all"></i> <%= user.replies.count %>
-					</p>
-				</li>
-			</ul>
-			<% end %> 
+				</div>
+				<div id="repfav">
+					<i class="fas fa-tree"></i> <%= user.posts.count %>
+					<i class="fas fa-reply-all"></i> <%= user.replies.count %>
+				</div>
+			</div>
+			<% end %>
 		</div>
 	</div>
 </div>

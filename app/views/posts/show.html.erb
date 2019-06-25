@@ -1,25 +1,37 @@
-<div class="container-fluid bg-green"> 
+<div class="container-fluid"> 
 	<% if flash[:notice] %>
 	<p id="flash"> <%= flash[:notice] %></p>
 	<% end %>
 	<div class="raw">
-		<!--modal-->
-		<div class="col-md-6">
+		<div class="col-md-10 col-md-offset-1 notspillout">
+			<h2 class="text-center" style="color:#ffffff;"><%= @post.post_title %></h2>		
+		</div>
+		<div class="col-md-1" id="headbutton">
+			<!--modal-->
 			<%= render 'posts/replymodal', post: @post, reply: @reply %>
 			<!--/modal-->
-		</div>
-		<div class="col-md-6">
-			<%= link_to 'ツイート', "https://twitter.com/share?url=#{request.url}&text=#{@post.post_title}", title: 'Twitter', target: '_blank',class: "btn btn-primary" %>
+			<%= link_to 'ツイート', "https://twitter.com/share?url=#{request.url}&text=#{@post.post_title}", title: 'Twitter', target: '_blank',class: "btn btn-primary fab fa-twitter" %>
+			<!--fav-->
+			<% if @post.favorited_by?(current_user) %>
+			<%= link_to post_favorites_path(@post), method: :delete do %>
+			<button type="button" class="btn btn-danger btn-sm"><i class="fa fa-heart" aria-hidden="true"><%= @post.favorites.count %> いいね!</i></button>
+			<% end %>
+			<% else %>
+			<%= link_to post_favorites_path(@post), method: :post do %>
+			<button type="button" class="btn btn-info btn-sm"><i class="fa fa-heart" aria-hidden="true"></i><%= @post.favorites.count %> いいね!</i></button>
+			<% end %>
+			<% end %>
+			<!--/fav-->
 		</div>
 		<% @replies.each do |reply| %>
 		<% if @post.user != reply.user %>
 		<!--other_user_reply-->
 		<div class="col-md-10 col-md-offset-1" id="contentsbox">
 			<div class="col-md-5 well">
-				<div class="contents">
-					<p class="posttitle"><%= reply.reply_title %></p>
+				<div class="notspillout">
+					<p id="posttitle"><%= reply.reply_title %></p>
 					<%= attachment_image_tag reply, :reply_image, :fill, 436, 436 %>
-					<p class="posttext"><%= reply.reply_text %></p>
+					<p id="posttext"><%= reply.reply_text %></p>
 					<%= link_to user_path(reply.user.id) do %>
 					<%= attachment_image_tag reply.user, :user_image, :fill, 50, 50 %>
 					<% end %>
@@ -33,10 +45,10 @@
 		<!--@post.user_reply-->
 		<div class="col-md-10 col-md-offset-1" id="contentsbox">
 			<div class="col-md-5 col-md-offset-7 well">
-				<div class="contents">
-					<p class="posttitle"><%= reply.reply_title %></p>
+				<div class="notspillout">
+					<p id="posttitle"><%= reply.reply_title %></p>
 					<%= attachment_image_tag reply, :reply_image, :fill, 436, 436 %>
-					<p class="posttext"><%= reply.reply_text %></p>
+					<p id="posttext"><%= reply.reply_text %></p>
 					<%= link_to user_path(reply.user.id) do %>
 					<%= attachment_image_tag reply.user, :user_image, :fill, 50, 50 %>
 					<% end %>
@@ -51,34 +63,26 @@
 		<!--first_post-->
 		<div class="col-md-10 col-md-offset-1" id="contentsbox">
 			<div class="col-md-5 col-md-offset-7 well">
-				<div class="contents">
-					<p class="posttitle"><%= @post.post_title %></p>
+				<div class="notspillout">
+					<p id="posttitle"><%= @post.post_title %></p>
+					<div class="notspillout">
+						<span class="btn btn-default"><%= raw(@post.tag_list.map { |t| link_to t, tag_path(t) }.join(', ')) %></span>
+					</div>
 					<%= attachment_image_tag @post, :post_image, :fill, 436, 436 %>
-					<p class="posttext"><%= @post.post_text %></p>
-					<%= link_to user_path(@post.user.id) do %>
-					<%= attachment_image_tag @post.user, :user_image, :fill, 50, 50 %>
-					<% end %>
-					<%= link_to @post.user.name, user_path(@post.user.id)%>
-					<% if current_user.admin? || current_user == @post.user %>
-					<span class="button">
-						<%= link_to "edit",edit_post_path(@post.id), class: "btn btn-warning" %>
-						<%= link_to "delete", post_path(@post.id), method: :delete, data: {confirm: "消去しますか?"}, class: "btn btn-danger" %>
-					</span>
-					<% end %>
-					<!--fav-->
+					<p id="posttext"><%= @post.post_text %></p>
+					<div>
+						<%= link_to user_path(@post.user.id) do %>
+						<%= attachment_image_tag @post.user, :user_image, :fill, 50, 50 %>
+						<% end %>
+						<%= link_to @post.user.name, user_path(@post.user.id)%>
+					</div>
 					<div class="pull-right">
-						<% if @post.favorited_by?(current_user) %>
-						<%= link_to post_favorites_path(@post), method: :delete do %>
-						<i class="fa fa-heart" aria-hidden="true" style="color: red;"></i>
-						<%= @post.favorites.count %> favorite 
+						<% if current_user.admin? || current_user == @post.user %>
+						<span class="button">
+							<%= link_to "edit",edit_post_path(@post.id), class: "btn-sm btn-warning" %>
+							<%= link_to "delete", post_path(@post.id), method: :delete, data: {confirm: "消去しますか?"}, class: "btn-sm btn-danger" %>
+						</span>
 						<% end %>
-						<% else %>
-						<%= link_to post_favorites_path(@post), method: :post do %>
-						<i class="fa fa-heart-o" aria-hidden="true"></i>
-						<%= @post.favorites.count %> favorite
-						<% end %>
-						<% end %>
-						<!--/fav-->
 						<span><%= @post.created_at.strftime('%Y/%m/%d %H:%M') %> ( <%= time_ago_in_words(@post.created_at) %> ago )</span>
 					</div>
 				</div>
@@ -87,12 +91,12 @@
 		<!--/first_post-->
 	</div>
 </div>
-<div class="container-fluid soil">
+<div class="container-fluid">
 	<div class="raw">
 		<div class="col-md-10 col-md-offset-1">
 			<!--comment-->
 			<% @post.comments.each do |comment| %>
-			<div class="well">
+			<div class="well commentform">
 				<%= link_to user_path(comment.user.id) do %>
 				<%= attachment_image_tag comment.user, :user_image, :fill, 40, 40 %>
 				<% end %>
@@ -105,33 +109,9 @@
 			<% end %>
 			<%= form_for [@post, @comment] do |f| %>
 			<%= f.text_area :comment_text, rows:'1', class: "form-control commentform",placeholder: "コメントをここに" %>
-			<%= f.submit "コメントを投稿", class: "btn btn-primary center-block" %>
+			<%= f.submit "コメントを投稿", class: "btn btn-default center-block" %>
 			<% end %>
 			<!--/comment-->
 		</div>
 	</div>
 </div>
-
-<style>
-	#modal {
-		margin-bottom: 20px;
-	}
-	#contentsbox {
-		position: relative
-	}
-	.button {
-		float: right;
-	}
-	.posttitle {
-		font-weight: bold;
-		font-size: 120%;
-		border-bottom: dashed 3px #1c8c42;
-		line-height: 1.5
-	}
-	.posttext {
-		margin-top: 5px;
-	}
-	.commentform {
-		margin: 20px auto;
-	}
-</style>

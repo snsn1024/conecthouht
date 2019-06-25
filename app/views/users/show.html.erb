@@ -1,4 +1,4 @@
-<div class="container-fluid bg-green">
+<div class="container-fluid">
 	<% if flash[:notice] %>
 	<p id="flash"> <%= flash[:notice] %></p>
 	<% end %>
@@ -8,7 +8,7 @@
 			<!--follow status -->
 			<h4><%= @user.following.count %> Following</h4>
 			<% @following.each do |user| %>
-			<div class="inline-block follow">
+			<div class="inline-block" id="follow">
 				<%= link_to user_path(user.id) do %>
 				<%= attachment_image_tag user, :user_image, :fill, 40, 40 %>
 				<% end %> 
@@ -16,7 +16,7 @@
 			<% end %>
 			<h4><%= @user.followers.count %> Followers</h4>
 			<% @followers.each do |user| %>
-			<div class="inline-block follow">
+			<div class="inline-block" id="follow">
 				<%= link_to user_path(user.id) do %>
 				<%= attachment_image_tag user, :user_image, :fill, 40, 40 %>
 				<% end %>
@@ -52,15 +52,13 @@
 			</ul>
 			<% end %>
 		</div>
-		<div class="col-md-3 well" id="scrollbox">
+		<div class="col-md-3 well notspillout" id="scrollbox">
 			<%= attachment_image_tag @user, :user_image, :fill, 320, 320, class: "img-responsive center-block" %>
 			<h4><%= @user.name %></h4>
 			<p><%= @user.profile %></p>
 			<p>登録日 : <%= @user.created_at.strftime('%Y/%m/%d %H:%M') %> ( <%= time_ago_in_words(@user.created_at) %> ago )</p>
-			<% if current_user.admin? %>
-			<p class="text-right"><%= link_to "edit",edit_user_path(current_user.id),class: "btn btn-warning" %></p>
-			<% elsif current_user == @user %>
-			<p class="text-right"><%= link_to "edit",edit_user_path(current_user.id),class: "btn btn-warning" %></p>
+			<% if current_user.admin? || current_user == @user %>
+			<p class="text-right"><%= link_to "edit",edit_user_path(current_user.id), class: "btn btn-warning btn-block" %></p>
 			<% end %>
 			<!--follow_unfollow botton-->
 			<% if current_user != @user %> 
@@ -68,16 +66,16 @@
 				<% unless current_user.following?(@user) %>
 				<%= form_for(current_user.active_relationships.build) do |f| %>
 				<div><%= hidden_field_tag :followed_id, @user.id %></div>
-				<%= f.submit "Follow", class: "btn btn-primary" %>
+				<%= f.submit "Follow", class: "btn btn-primary btn-block" %>
 				<% end %>
 				<% else %>
 				<%= form_for(current_user.active_relationships.find_by(followed_id: @user.id),
 				html: { method: :delete }) do |f| %>
-				<%= f.submit "Unfollow", class: "btn" %>
+				<%= f.submit "Unfollow", class: "btn btn-default btn-block" %>
 				<% end %>
 				<% end %>
 			</div>
-			<div class="followers">
+			<div id="followers">
 				<% unless current_user.followers?(@user) %>
 				<p class="text-right">
 					このユーザーにフォローされていません
@@ -96,18 +94,4 @@
 	.well {
 		right: 5px;
 	}
-	.followers {
-		margin-top: 5px;
-		font-size: 80%;
-	}
-	.follow {
-		margin: 4px 2px;
-	}
-	#scrollbox {
-		height: 516px;
-		overflow: scroll;
-	}
-	h4 {
-		border-bottom: dashed 3px #1c8c42;
-		line-height: 1.5
-	</style>
+</style>

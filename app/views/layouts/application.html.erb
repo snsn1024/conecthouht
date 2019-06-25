@@ -6,8 +6,8 @@
   <%= csp_meta_tag %>
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" >
   <link rel="stylesheet" href="style.css">
 </head>
@@ -19,31 +19,32 @@
         <div class="row">
           <div class="col-md-8 col-md-offset-2">
             <div class="navbar-headline inline-block">
-              <%= link_to root_path do %>
-              <p class="title"><strong>Conecthouht</strong></p>
+              <% if user_signed_in? %>
+              <%= link_to '/home' do %>
+              <p id="title"><strong>Conecthouht</strong></p>
+              <% end %>
+              <% else %>
+              <%= link_to '/top' do %>
+              <p id="title"><strong>Conecthouht</strong></p>
+              <% end %>
               <% end %>
             </div>
             <ul class="nav navbar-nav navbar-right">
               <% if user_signed_in? %>
               <!-- search bar -->
               <li>
-                <div class="search_box">
+                <div id="search_box">
                   <div class="inline-block"><%= search_form_for @search, url: posts_path do |f| %>
                     <%= f.search_field :post_title_cont, class: "form-control",placeholder: "タイトルを入力" %>
                   </div>
-                  <div class="inline-block"><%= f.submit "Search" %>
+                  <div class="inline-block"><%= f.submit "Search", class: "btn btn-default" %>
                   </div>
                   <% end %>
                 </div>
               </li>
               <!-- /search bar -->
-              <li>
-                <%= link_to user_path(current_user.id) do %>
-                <%= attachment_image_tag current_user, :user_image, :fill, 40, 40 %>
-                <% end %>
-              </li>
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><%= current_user.name %><span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"><%= attachment_image_tag current_user, :user_image, :fill, 35, 35 %><span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><%= link_to "マイページ",user_path(current_user.id) %></li>
                   <li><%= link_to "投稿一覧",'/posts' %></li>
@@ -52,67 +53,31 @@
                 </ul>
               </li>
               <% else %>
-              <li class="unlogin"><%= link_to' Register','/users/sign_up' %></li>
-              <li class="unlogin"><%= link_to' Login','/users/sign_in' %></li>
+              <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+              <div id="headeritem">
+                <li class="inline-block"><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder:"メールアドレス"%></li>
+                <li class="inline-block"><%= f.password_field :password, autocomplete: "current-password", placeholder:"パスワード" %></li>
+                <li class="inline-block"><%= f.submit "Login", class: "btn-sm btn-primary" %></li>
+              </div>
+              <% end %>
               <% end %>
             </ul>
           </div>
         </div>
       </div>
     </nav>
-  </nav>
-</header>
-<%= yield %>
-<footer>
-  <div class="container-fluid soil">
-    <div class="row">
-      <div class="col-md-12 text-center">
-        <ul class="list-inline">
-          <li class="list-inline-item">Copyright © 2019 Conecthouht All Rights Reserved.</li>
-        </ul>
+  </header>
+  <%= yield %>
+  <footer id="footer">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 text-center">
+          <ul class="list-inline">
+            <li class="list-inline-item">Copyright © 2019 Conecthouht All Rights Reserved.</li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
-</footer>
+  </footer>
 </body>
 </html>
-
-<style>
-  body {
-   margin: 0px;
-   padding: 0px;
-   background-color: #802d29;
- }
- .dropdown {
-  margin-top: 10px;
-}
-.title {
-  color: #1c8c42;
-  font-size: 40px;
-  font-family: arial block;
-}
-.unlogin {
-  margin: 7px 5px 0 0;
-}
-.inline-block {
-  display: inline-block;
-}
-.search_box{
-  padding-top: 17px;
-}
-.bg-green {
-  padding-top: 20px;
-  margin-top: -20px;
-}
-.col-md-4 {
-  margin: auto 5px;
-}
-#flash {
-    color: #ffffff;
-    text-align: center;
-}
-footer {
-  color: #ffffff;
-  padding: 20px 0;
-}
-</style>

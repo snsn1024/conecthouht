@@ -1,0 +1,47 @@
+<div class="container-fluid">
+	<% if flash[:notice] %>
+	<p id="flash"> <%= flash[:notice] %></p>
+	<% end %>
+	<div class="raw">
+		<div class="col-md-8 col-md-offset-2">
+			<ul class="list-group">
+				<li class="list-group-item" id="contentsbox">
+					<h5>新規投稿一覧</h5>
+				</li>
+				<% @posts.each do |post| %>
+				<li class="list-group-item" id="contentsbox">
+					<%= attachment_image_tag post.user, :user_image, :fill, 70, 70 %>
+					<div class="inline-block notspillout">
+						<%= link_to post.post_title,post_path(post.id) %>
+					</div>
+					<div id="repfav">
+						<i class="fas fa-reply"></i> <%= post.replies.count %>
+						<i class="fas fa-heart"></i> <%= post.favorites.count %>
+						by <%= link_to post.user.name, user_path(post.user.id) %>
+						<%= post.created_at.strftime('%Y/%m/%d %H:%M') %> ( <%= time_ago_in_words(post.created_at) %> ago )
+					</div>
+				</li>
+				<% end %>
+			</ul>
+			<ul class="list-group">
+				<li class="list-group-item" id="contentsbox">
+					<h5>新規ユーザー一覧</h5>
+				</li>
+				<% @users.each do |user| %>
+				<li class="list-group-item" id="contentsbox">
+					<%= link_to attachment_image_tag(user, :user_image, :fill, 70, 70),user_path(user.id) %>
+					<div class="inline-block notspillout">
+						<p><strong><%= link_to user.name,user_path(user.id) %></strong></p>
+						<%= user.profile %>
+					</div>
+				</li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
+</div>
+<style>
+	.notspillout {
+		margin-left: 10px;
+	}
+</style>

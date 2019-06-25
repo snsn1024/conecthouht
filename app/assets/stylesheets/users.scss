@@ -1,3 +1,30 @@
-// Place all the styles related to the Users controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+.col-md-4 {
+	margin: auto 5px;
+}
+.panel-default {
+	margin: 50px 0;
+}
+.panel-body {
+	margin-top: 10px;
+}
+.field {
+	margin: 10px 0;
+}
+.actions {
+	padding-bottom: 10px;
+}
+#followers {
+	margin-top: 5px;
+	font-size: 80%;
+}
+#follow {
+	margin: 4px 2px;
+}
+#scrollbox {
+	height: 80vh;
+	overflow: scroll;
+}
+h4 {
+	border-bottom: dashed 3px #1c8c42;
+	line-height: 1.5
+}

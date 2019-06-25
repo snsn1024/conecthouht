@@ -1,5 +1,5 @@
-<div class="container text-center" id="modal">
-	<button type="button" class="btn btn-default mt-5" data-toggle="modal" data-target="#post">投稿する</button>
+<div class="text-center" id="modal">
+	<button type="button" class="btn btn-default mt-5 fas fa-tree" data-toggle="modal" data-target="#post">投稿する</button>
 	<div class="modal fade" id="post" tabindex="-1" role="dialog" aria-hidden="true">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
@@ -7,6 +7,8 @@
 				<div class="modal-body">
 					<p>タイトル</p>
 					<%= f.text_field :post_title, size: "70x1" %>
+					<p>タグ</p>
+					<%= f.text_field :tag_list, size: "70x1" %>
 					<p>テキスト</p>
 					<%= f.text_area :post_text, size: "70x8"  %>
 					<p>画像</p>
