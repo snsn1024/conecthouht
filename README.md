@@ -1,24 +1,11 @@
-# README
+Conecthouht
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+=====
 
-Things you may want to cover:
+##Overview
+Conecthouhtはユーザー間で発想を繋ぐwebアプリです。
+connect(繋ぐ) + thought(思想)のNとGが抜けているのは発想にNGは無いという意味があります。
 
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+##Description
+ユーザーはサイトに訪れユーザー登録をした後に各自投稿や返信をしていきます。
+他人のインスピレーションにいち早く反応を示したい人に向けてコメントやいいね！を付けてもいいでしょう。
